@@ -1,3 +1,7 @@
-export function Navbar({ text }: { text: string }) {
-  return <p>Navbar</p>;
+export function Navbar({ logo }: { logo: any }) {
+  return (
+    <nav>
+      <img src={logo} />
+    </nav>
+  );
 }
