@@ -9,7 +9,7 @@ export function CardsContainer() {
     return console.log("hi");
   };
   return (
-    <article>
+    <article className="border rounded-2xl h-[80vh] bg-orange-light p-2">
       <TextButton
         text="Default button"
         type="default"

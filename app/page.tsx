@@ -9,10 +9,10 @@ export default function Home(): JSX.Element {
     console.log("hi");
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <p className={`m-0 max-w-[30ch] text-sm `}>TEXTO PRUEBA</p>
-
+    <main className="flex flex-col p-4">
       <CardsContainer />
+
+      <p className={`m-0 max-w-[30ch] text-sm `}>TEXTO PRUEBA</p>
     </main>
   );
 }

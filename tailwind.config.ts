@@ -10,6 +10,7 @@ const config: Config = {
     colors: {
       orange: "#FF8911",
       "orange-light": "#FFF8EE",
+      white: "#FFFFFF",
     },
   },
   plugins: [],
