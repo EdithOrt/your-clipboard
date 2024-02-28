@@ -1,16 +1,21 @@
 "use client";
 
 import { TextButton } from "./button";
+import { Card } from "./card";
 
 export function CardsContainer() {
   const handleExample = () => {
     return console.log("hi");
   };
   return (
-    <TextButton
-      text="Default button"
-      type="default"
-      handleClick={handleExample}
-    />
+    <article>
+      <TextButton
+        text="Default button"
+        type="default"
+        handleClick={handleExample}
+      />
+
+      <Card text="Card prueba" />
+    </article>
   );
 }

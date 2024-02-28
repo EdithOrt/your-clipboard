@@ -1,3 +1,25 @@
+import { IconButton } from "./button";
+
 export function Card({ text }: { text: string }) {
-  return <p>Card</p>;
+  const handleClick = () => {
+    return console.log("click to close");
+  };
+  return (
+    <section>
+      <div>
+        <p>date</p>
+
+        <IconButton icon="x" type="default" handleClick={handleClick} />
+      </div>
+
+      <div>
+        <p>{text}</p>
+      </div>
+
+      <div>
+        <IconButton icon="*" type="default" handleClick={handleClick} />
+        <IconButton icon="copy" type="default" handleClick={handleClick} />
+      </div>
+    </section>
+  );
 }

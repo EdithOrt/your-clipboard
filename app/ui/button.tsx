@@ -14,14 +14,26 @@ export function TextButton({
   }
 }
 
-export function IconButton(
-  { text }: { text: string },
-  { handleClick }: { handleClick: any },
-  { type }: { type: "circle" | "default" }
-) {
+export function IconButton({
+  icon,
+  handleClick,
+  type,
+}: {
+  icon: any;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  type: "circle" | "default";
+}) {
   if (type === "default") {
-    return <button onClick={handleClick}>{text}</button>;
+    return (
+      <button onClick={handleClick}>
+        <img src={icon} />
+      </button>
+    );
   } else if (type === "circle") {
-    return <a onClick={handleClick}>{text}</a>;
+    return (
+      <button onClick={handleClick}>
+        <img src={icon} />
+      </button>
+    );
   }
 }
