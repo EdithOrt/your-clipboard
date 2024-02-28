@@ -14,6 +14,7 @@ export function CardsContainer() {
         text="Default button"
         type="default"
         handleClick={handleExample}
+        style="secondary"
       />
 
       <Card text="Card prueba" />
