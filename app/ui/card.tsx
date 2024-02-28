@@ -5,7 +5,7 @@ export function Card({ text }: { text: string }) {
     return console.log("click to close");
   };
   return (
-    <section>
+    <section className="border border-orange">
       <div>
         <p>date</p>
 
