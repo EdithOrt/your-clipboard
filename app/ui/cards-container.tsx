@@ -2,6 +2,7 @@
 
 import { TextButton } from "./button";
 import { Card } from "./card";
+import { Tooltip } from "./tooltip";
 
 export function CardsContainer() {
   const handleExample = () => {
@@ -16,6 +17,7 @@ export function CardsContainer() {
       />
 
       <Card text="Card prueba" />
+      <Tooltip text="Tooltip" />
     </article>
   );
 }

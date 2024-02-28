@@ -1,3 +1,3 @@
 export function Tooltip({ text }: { text: string }) {
-  return <p>Tooltip</p>;
+  return <span>{text}</span>;
 }
