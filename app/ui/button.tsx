@@ -16,10 +16,10 @@ export function TextButton({
   if (type === "default") {
     return (
       <button
-        className={clsx("text-base font-bold border px-8 py-2 rounded-3xl", {
-          "text-white hover:text-orange hover:bg-white border-white":
+        className={clsx("rounded-3xl border px-8 py-2 text-base font-bold", {
+          "border-white text-white hover:bg-white hover:text-orange":
             style === "primary",
-          "text-orange hover:text-white hover:bg-orange border-orange":
+          "border-orange text-orange hover:bg-orange hover:text-white":
             style === "secondary",
         })}
         onClick={(e) => handleClick(e)}
@@ -67,7 +67,7 @@ export function IconButton({
     return (
       <button
         onClick={handleClick}
-        className="icon-button font-bold flex border rounded-full border-orange bg-white w-[100px] h-[100px] hover:bg-orange hover:text-white justify-center items-center"
+        className="icon-button flex h-[100px] w-[100px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
       >
         <p>Clear all</p>
         <Image
