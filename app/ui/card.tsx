@@ -1,4 +1,8 @@
 import { IconButton } from "./button";
+import closeIcon from "@/public/close-icon.svg";
+import favoriteInactiveIcon from "@/public/star-line.svg";
+import favoriteActiveIcon from "@/public/star-fill.svg";
+import copyIcon from "@/public/copy.svg";
 
 export function Card({ text }: { text: string }) {
   const handleClick = () => {
@@ -11,10 +15,10 @@ export function Card({ text }: { text: string }) {
 
         <IconButton
           variant="default"
-          icon="x"
+          icon={closeIcon}
           type="default"
           handleClick={handleClick}
-          expresion={undefined}
+          expression={undefined}
         />
       </div>
 
@@ -24,18 +28,17 @@ export function Card({ text }: { text: string }) {
 
       <div>
         <IconButton
-          variant="tooltip"
-          icon="*"
+          variant="default"
+          icon={favoriteInactiveIcon}
           type="default"
           handleClick={handleClick}
-          expresion="Favorite"
         />
         <IconButton
           variant="tooltip"
-          icon="copy"
+          icon={copyIcon}
           type="default"
           handleClick={handleClick}
-          expresion="Copy"
+          expression="Coppied"
         />
       </div>
     </section>

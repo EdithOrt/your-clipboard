@@ -37,13 +37,13 @@ export function IconButton({
   handleClick,
   type,
   variant,
-  expresion,
+  expression,
 }: {
   icon: string;
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
   type: "circle" | "default";
   variant: "tooltip" | "default";
-  expresion?: string;
+  expression?: string;
 }) {
   if (type === "default") {
     return (
@@ -59,7 +59,7 @@ export function IconButton({
         </button>
 
         {variant === "tooltip" && (
-          <Tooltip text={!expresion ? "" : expresion} />
+          <Tooltip text={!expression ? "" : expression} />
         )}
       </div>
     );
