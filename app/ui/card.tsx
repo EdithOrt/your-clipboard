@@ -9,7 +9,13 @@ export function Card({ text }: { text: string }) {
       <div>
         <p>date</p>
 
-        <IconButton icon="x" type="default" handleClick={handleClick} />
+        <IconButton
+          variant="default"
+          icon="x"
+          type="default"
+          handleClick={handleClick}
+          expresion={undefined}
+        />
       </div>
 
       <div>
@@ -17,8 +23,20 @@ export function Card({ text }: { text: string }) {
       </div>
 
       <div>
-        <IconButton icon="*" type="default" handleClick={handleClick} />
-        <IconButton icon="copy" type="default" handleClick={handleClick} />
+        <IconButton
+          variant="tooltip"
+          icon="*"
+          type="default"
+          handleClick={handleClick}
+          expresion="Favorite"
+        />
+        <IconButton
+          variant="tooltip"
+          icon="copy"
+          type="default"
+          handleClick={handleClick}
+          expresion="Copy"
+        />
       </div>
     </section>
   );

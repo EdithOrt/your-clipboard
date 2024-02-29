@@ -1,0 +1,15 @@
+.icon-button:hover img {
+  display: none;
+}
+
+.icon-button:hover p {
+  display: block;
+}
+
+.icon-button img {
+  display: block;
+}
+
+.icon-button p {
+  display: none;
+}

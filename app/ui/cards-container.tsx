@@ -1,8 +1,10 @@
 "use client";
 
-import { TextButton } from "./button";
+import Image from "next/image";
+import { IconButton, TextButton } from "./button";
 import { Card } from "./card";
 import { Tooltip } from "./tooltip";
+import trashIcon from "@/public/trash-icon.svg";
 
 export function CardsContainer() {
   const handleExample = () => {
@@ -10,6 +12,13 @@ export function CardsContainer() {
   };
   return (
     <article className="border rounded-2xl h-[80vh] bg-orange-light p-2">
+      <IconButton
+        icon={trashIcon}
+        handleClick={handleExample}
+        type="circle"
+        variant="default"
+      />
+
       <TextButton
         text="Default button"
         type="default"
