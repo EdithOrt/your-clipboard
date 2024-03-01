@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { roboto } from "./ui/fonts";
 import "./globals.css";
 import { Navbar } from "./ui/navbar";
+import logo from "@/public/y-clipboard-logo.svg";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.className} antialiased`}>
-        <Navbar logo="logo" />
+        <Navbar logo={logo} />
         {children}
       </body>
     </html>
