@@ -8,20 +8,30 @@ export function FooterContainer() {
     console.log("hi");
   };
   return (
-    <footer>
-      <IconButton
-        icon={trashIcon}
-        handleClick={handleExample}
-        type="circle"
-        variant="default"
-      />
+    <footer className="mt-4 flex w-full items-start justify-between ">
+      <div className="flex gap-x-4">
+        <TextButton
+          text="Default button"
+          type="default"
+          handleClick={handleExample}
+          style="secondary"
+        />
+        <TextButton
+          text="Default button"
+          type="default"
+          handleClick={handleExample}
+          style="secondary"
+        />
+      </div>
 
-      <TextButton
-        text="Default button"
-        type="default"
-        handleClick={handleExample}
-        style="secondary"
-      />
+      <div className="mr-4 self-end justify-self-center">
+        <IconButton
+          icon={trashIcon}
+          handleClick={handleExample}
+          type="circle"
+          variant="default"
+        />
+      </div>
     </footer>
   );
 }

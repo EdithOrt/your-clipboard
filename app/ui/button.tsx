@@ -67,7 +67,7 @@ export function IconButton({
     return (
       <button
         onClick={handleClick}
-        className="icon-button flex h-[100px] w-[100px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
+        className="icon-button flex h-[80px] w-[80px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
       >
         <p>Clear all</p>
         <Image
