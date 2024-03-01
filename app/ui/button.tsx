@@ -47,13 +47,13 @@ export function IconButton({
 }) {
   if (type === "default") {
     return (
-      <div>
+      <div className="">
         <button onClick={handleClick}>
           <Image
             src={icon}
             alt="static name"
-            height={50}
-            width={50}
+            height={19}
+            width={19}
             unoptimized
           />
         </button>

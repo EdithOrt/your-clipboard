@@ -13,3 +13,19 @@
 .icon-button p {
   display: none;
 }
+
+/* width */
+.card__text::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.card__text::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.card__text::-webkit-scrollbar-thumb {
+  background: #ff8911;
+  border-radius: 10px;
+}
