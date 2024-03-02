@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { Tooltip } from "./tooltip";
+import { ReactNode } from "react";
 
 export function TextButton({
   text,
@@ -33,33 +34,25 @@ export function TextButton({
 }
 
 export function IconButton({
-  icon,
   handleClick,
   type,
   variant,
   expression,
+  children,
 }: {
-  icon: string;
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
   type: "circle" | "default";
   variant: "tooltip" | "default";
   expression?: string;
+  children: ReactNode;
 }) {
   if (type === "default") {
     return (
       <div className="">
-        <button onClick={handleClick}>
-          <Image
-            src={icon}
-            alt="static name"
-            height={19}
-            width={19}
-            unoptimized
-          />
-        </button>
+        <button onClick={handleClick}>{children}</button>
 
         {variant === "tooltip" && (
-          <Tooltip text={!expression ? "" : expression} />
+          <Tooltip text={!expression ? "" : expression} state="inactive" />
         )}
       </div>
     );
@@ -70,13 +63,7 @@ export function IconButton({
         className="icon-button flex h-[80px] w-[80px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
       >
         <p>Clear all</p>
-        <Image
-          src={icon}
-          alt="static name"
-          height={26}
-          width={26}
-          unoptimized
-        />
+        {children}
       </button>
     );
   }

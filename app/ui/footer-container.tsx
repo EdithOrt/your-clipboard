@@ -2,6 +2,7 @@
 
 import { TextButton, IconButton } from "@/app/ui/button";
 import trashIcon from "@/public/trash-icon.svg";
+import { SVGComponent } from "../lib/utils";
 
 export function FooterContainer() {
   const handleExample = () => {
@@ -25,12 +26,9 @@ export function FooterContainer() {
       </div>
 
       <div className="mr-4 self-end justify-self-center">
-        <IconButton
-          icon={trashIcon}
-          handleClick={handleExample}
-          type="circle"
-          variant="default"
-        />
+        <IconButton handleClick={handleExample} type="circle" variant="default">
+          <SVGComponent height="23" width="32" icon="trash-icon" />
+        </IconButton>
       </div>
     </footer>
   );

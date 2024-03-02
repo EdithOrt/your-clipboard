@@ -29,3 +29,20 @@
   background: #ff8911;
   border-radius: 10px;
 }
+
+.card__text::-webkit-scrollbar {
+  width: 10px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background: #ff8911;
+  border-radius: 10px;
+}
+
+.cards-container::-webkit-scrollbar {
+  width: 10px;
+}

@@ -1,9 +1,6 @@
 import { IconButton } from "./button";
-import closeIcon from "@/public/close-icon.svg";
-import favoriteInactiveIcon from "@/public/star-line.svg";
-import favoriteActiveIcon from "@/public/star-fill.svg";
-import copyIcon from "@/public/copy.svg";
 import { manjari } from "./fonts";
+import { SVGComponent } from "../lib/utils";
 
 export function Card({ text }: { text: string }) {
   const handleClick = () => {
@@ -18,11 +15,12 @@ export function Card({ text }: { text: string }) {
 
         <IconButton
           variant="default"
-          icon={closeIcon}
           type="default"
           handleClick={handleClick}
           expression={undefined}
-        />
+        >
+          <SVGComponent width="12" height="21" icon="close-icon" />
+        </IconButton>
       </div>
 
       <div className="card__text h-[60%] overflow-auto">
@@ -30,19 +28,17 @@ export function Card({ text }: { text: string }) {
       </div>
 
       <div className="mr-3 mt-2 flex justify-end gap-2.5">
-        <IconButton
-          variant="default"
-          icon={favoriteInactiveIcon}
-          type="default"
-          handleClick={handleClick}
-        />
+        <IconButton variant="default" type="default" handleClick={handleClick}>
+          <SVGComponent width="12" height="21" icon="star-line" />
+        </IconButton>
         <IconButton
           variant="tooltip"
-          icon={copyIcon}
           type="default"
           handleClick={handleClick}
           expression="Coppied"
-        />
+        >
+          <SVGComponent width="12" height="21" icon="copy-icon" />
+        </IconButton>
       </div>
     </section>
   );
