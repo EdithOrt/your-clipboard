@@ -1,8 +1,16 @@
 "use client";
 
 import { Card } from "./card";
+import { readClipboard } from "../lib/getClipboard";
 
 export function CardsContainer() {
+  /* document.addEventListener("copy", (e) => {
+    e.preventDefault();
+    const selectedText = window.getSelection().toString();
+    console.log({ selectedText });
+    readClipboard();
+  }); */
+
   const handleExample = () => {
     return console.log("hi");
   };

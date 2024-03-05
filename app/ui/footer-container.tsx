@@ -3,8 +3,12 @@
 import { TextButton, IconButton } from "@/app/ui/button";
 import trashIcon from "@/public/trash-icon.svg";
 import { SVGComponent } from "../lib/utils";
+import { readClipboard } from "../lib/getClipboard";
 
 export function FooterContainer() {
+  const addText = () => {
+    readClipboard();
+  };
   const handleExample = () => {
     console.log("hi");
   };
@@ -25,8 +29,24 @@ export function FooterContainer() {
         />
       </div>
 
+      <div>
+        <IconButton
+          handleClick={addText}
+          type="circle"
+          variant="default"
+          hoverText="Add text"
+        >
+          <SVGComponent height="23" width="32" icon="add-icon" />
+        </IconButton>
+      </div>
+
       <div className="mr-4 self-end justify-self-center">
-        <IconButton handleClick={handleExample} type="circle" variant="default">
+        <IconButton
+          handleClick={handleExample}
+          type="circle"
+          variant="default"
+          hoverText="Clear all"
+        >
           <SVGComponent height="23" width="32" icon="trash-icon" />
         </IconButton>
       </div>

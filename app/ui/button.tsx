@@ -40,6 +40,7 @@ export function IconButton({
   expression,
   children,
   tooltipState,
+  hoverText,
 }: {
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
   type: "circle" | "default";
@@ -47,6 +48,7 @@ export function IconButton({
   expression?: string;
   children: ReactNode;
   tooltipState?: boolean;
+  hoverText?: string;
 }) {
   if (type === "default") {
     return (
@@ -73,7 +75,7 @@ export function IconButton({
         onClick={handleClick}
         className="button button--circle flex h-[80px] w-[80px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
       >
-        <p className="button__text">Clear all</p>
+        <p className="button__text">{!hoverText ? "" : hoverText}</p>
         <div className="button__img">{children}</div>
       </button>
     );
