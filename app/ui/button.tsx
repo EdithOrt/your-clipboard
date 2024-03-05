@@ -39,22 +39,31 @@ export function IconButton({
   variant,
   expression,
   children,
+  tooltipState,
 }: {
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
   type: "circle" | "default";
   variant: "tooltip" | "default";
   expression?: string;
   children: ReactNode;
+  tooltipState?: boolean;
 }) {
   if (type === "default") {
     return (
-      <div>
+      <div
+        className={clsx("flex", {
+          "relative ": variant === "tooltip",
+        })}
+      >
         <button onClick={handleClick} className="button button--icon">
           {children}
         </button>
 
         {variant === "tooltip" && (
-          <Tooltip text={!expression ? "" : expression} state="inactive" />
+          <Tooltip
+            text={!expression ? "" : expression}
+            state={!tooltipState ? false : true}
+          />
         )}
       </div>
     );
