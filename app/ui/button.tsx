@@ -48,8 +48,10 @@ export function IconButton({
 }) {
   if (type === "default") {
     return (
-      <div className="">
-        <button onClick={handleClick}>{children}</button>
+      <div>
+        <button onClick={handleClick} className="button button--icon">
+          {children}
+        </button>
 
         {variant === "tooltip" && (
           <Tooltip text={!expression ? "" : expression} state="inactive" />
@@ -60,10 +62,10 @@ export function IconButton({
     return (
       <button
         onClick={handleClick}
-        className="icon-button flex h-[80px] w-[80px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
+        className="button button--circle flex h-[80px] w-[80px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
       >
-        <p>Clear all</p>
-        {children}
+        <p className="button__text">Clear all</p>
+        <div className="button__img">{children}</div>
       </button>
     );
   }

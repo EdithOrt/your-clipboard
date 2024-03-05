@@ -1,17 +1,21 @@
-.icon-button:hover img {
+.button--circle:hover .button__img {
   display: none;
 }
 
-.icon-button:hover p {
+.button--circle:hover .button__text {
   display: block;
 }
 
-.icon-button img {
+.button--circle .button__img {
   display: block;
 }
 
-.icon-button p {
+.button--circle .button__text {
   display: none;
+}
+
+.button--icon:hover svg path {
+  fill: #ffbf7e;
 }
 
 /* width */

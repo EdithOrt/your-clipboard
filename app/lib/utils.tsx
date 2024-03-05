@@ -9,6 +9,7 @@ export const getIcon = (
     | "trash-icon",
 ): ReactNode => {
   let icon;
+  const className = "icon-effect";
   switch (iconName) {
     case "close-icon":
       icon = (
