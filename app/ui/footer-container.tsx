@@ -35,6 +35,7 @@ export function FooterContainer() {
           type="circle"
           variant="default"
           hoverText="Add text"
+          style="primary"
         >
           <SVGComponent height="23" width="32" icon="add-icon" />
         </IconButton>
@@ -46,6 +47,7 @@ export function FooterContainer() {
           type="circle"
           variant="default"
           hoverText="Clear all"
+          style="primary"
         >
           <SVGComponent height="23" width="32" icon="trash-icon" />
         </IconButton>

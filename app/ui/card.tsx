@@ -35,6 +35,7 @@ export function Card({ text }: { text: string }) {
           type="default"
           handleClick={handleClick}
           expression={undefined}
+          style="primary"
         >
           <SVGComponent width="12" height="21" icon="close-icon" />
         </IconButton>
@@ -49,6 +50,7 @@ export function Card({ text }: { text: string }) {
           variant="default"
           type="default"
           handleClick={updateFavorites}
+          style="primary"
         >
           {isFavorite ? (
             <SVGComponent width="12" height="21" icon="star-fill" />
@@ -62,6 +64,7 @@ export function Card({ text }: { text: string }) {
           handleClick={copyText}
           expression="Coppied"
           tooltipState={isCoppied}
+          style="primary"
         >
           <SVGComponent width="12" height="21" icon="copy-icon" />
         </IconButton>

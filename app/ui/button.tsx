@@ -41,6 +41,7 @@ export function IconButton({
   children,
   tooltipState,
   hoverText,
+  style,
 }: {
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
   type: "circle" | "default";
@@ -49,6 +50,7 @@ export function IconButton({
   children: ReactNode;
   tooltipState?: boolean;
   hoverText?: string;
+  style: "primary" | "secondary";
 }) {
   if (type === "default") {
     return (
@@ -57,7 +59,13 @@ export function IconButton({
           "relative ": variant === "tooltip",
         })}
       >
-        <button onClick={handleClick} className="button button--icon">
+        <button
+          onClick={handleClick}
+          className={clsx("button button--icon", {
+            "button--iconSecondary": style === "secondary",
+            "button--iconPrimary": style === "secondary",
+          })}
+        >
           {children}
         </button>
 
