@@ -5,7 +5,7 @@ import { FooterContainer } from "./ui/footer-container";
 
 export default async function Home() {
   return (
-    <main className="flex flex-col p-4">
+    <main className="flex flex-col overflow-x-hidden p-4">
       <AlertsContainer />
       <CardsContainer />
       <FooterContainer />

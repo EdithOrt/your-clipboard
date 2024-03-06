@@ -11,6 +11,7 @@
 body {
   color: #ff8911;
   background: #ffffff;
+  overflow-x: hidden;
 }
 
 @layer utilities {

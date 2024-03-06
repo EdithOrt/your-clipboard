@@ -58,3 +58,18 @@
 .cards-container::-webkit-scrollbar {
   width: 10px;
 }
+
+@keyframes alert {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+}
+
+.alert--animation {
+  animation: alert 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
