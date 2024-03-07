@@ -1,6 +1,11 @@
 import clsx from "clsx";
 
-export function Tooltip({ text, state }: { text: string; state: boolean }) {
+interface TooltipProps {
+  text: string;
+  state: boolean;
+}
+
+export function Tooltip({ text, state }: TooltipProps) {
   return (
     <span
       className={clsx(

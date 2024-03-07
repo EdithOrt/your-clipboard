@@ -1,21 +1,15 @@
-"use client";
-
 import clsx from "clsx";
 import { SVGComponent } from "../lib/utils";
 import { IconButton } from "./button";
-import { useState } from "react";
 
-export function Alert({
-  type,
-  text,
-  handleAlert,
-  alertState,
-}: {
+interface AlertProps {
   type: "error" | "warning" | "success";
   text: string;
-  handleAlert: any;
+  handleAlert: React.MouseEventHandler<HTMLButtonElement>;
   alertState: string;
-}) {
+}
+
+export function Alert({ type, text, handleAlert, alertState }: AlertProps) {
   return (
     <div
       className={clsx(

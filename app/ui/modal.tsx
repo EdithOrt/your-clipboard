@@ -5,13 +5,12 @@ import { IconButton } from "./button";
 import { SVGComponent } from "../lib/utils";
 import clsx from "clsx";
 
-export function Modal({
-  children,
-  isOpen,
-}: {
+interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
-}) {
+}
+
+export function Modal({ children, isOpen }: ModalProps) {
   const handleClick = () => {
     console.log("Close modal");
   };

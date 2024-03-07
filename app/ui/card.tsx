@@ -3,13 +3,14 @@ import { IconButton } from "./button";
 import { manjari } from "./fonts";
 import { SVGComponent } from "../lib/utils";
 
-export function Card({ text }: { text: string }) {
+interface CardProps {
+  text: string;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export function Card({ text, handleClick }: CardProps) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isCoppied, setIsCoppied] = useState<boolean>(false);
-
-  const handleClick = () => {
-    return console.log("click to close");
-  };
 
   const updateFavorites = () => {
     setIsFavorite(!isFavorite);
