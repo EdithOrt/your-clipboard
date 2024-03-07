@@ -1,19 +1,31 @@
 import clsx from "clsx";
-import Image from "next/image";
 import { Tooltip } from "./tooltip";
 import { ReactNode } from "react";
+
+interface TextButtonProps {
+  text: string;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  type: "download" | "default";
+  style: "primary" | "secondary";
+}
+
+interface IconButtonProps {
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  type: "circle" | "default";
+  variant: "tooltip" | "default";
+  expression?: string;
+  children: ReactNode;
+  tooltipState?: boolean;
+  hoverText?: string;
+  style: "primary" | "secondary";
+}
 
 export function TextButton({
   text,
   handleClick,
   type,
   style,
-}: {
-  text: string;
-  handleClick: React.MouseEventHandler<HTMLButtonElement>;
-  type: "download" | "default";
-  style: "primary" | "secondary";
-}) {
+}: TextButtonProps) {
   if (type === "default") {
     return (
       <button
@@ -23,7 +35,7 @@ export function TextButton({
           "border-orange text-orange hover:bg-orange hover:text-white":
             style === "secondary",
         })}
-        onClick={(e) => handleClick(e)}
+        onClick={handleClick}
       >
         {text}
       </button>
@@ -42,16 +54,7 @@ export function IconButton({
   tooltipState,
   hoverText,
   style,
-}: {
-  handleClick: React.MouseEventHandler<HTMLButtonElement>;
-  type: "circle" | "default";
-  variant: "tooltip" | "default";
-  expression?: string;
-  children: ReactNode;
-  tooltipState?: boolean;
-  hoverText?: string;
-  style: "primary" | "secondary";
-}) {
+}: IconButtonProps) {
   if (type === "default") {
     return (
       <div
