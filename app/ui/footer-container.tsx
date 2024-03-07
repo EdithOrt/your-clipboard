@@ -13,8 +13,8 @@ export function FooterContainer() {
     console.log("hi");
   };
   return (
-    <footer className="mt-4 flex w-full items-start justify-between ">
-      <div className="flex gap-x-4">
+    <footer className="mt-4 grid w-full grid-cols-3 ">
+      <div className="flex gap-x-4 self-start">
         <TextButton
           text="Default button"
           type="default"
@@ -29,7 +29,7 @@ export function FooterContainer() {
         />
       </div>
 
-      <div>
+      <div className="self-center justify-self-center">
         <IconButton
           handleClick={addText}
           type="circle"
@@ -41,7 +41,7 @@ export function FooterContainer() {
         </IconButton>
       </div>
 
-      <div className="mr-4 self-end justify-self-center">
+      <div className="mr-4 justify-self-end">
         <IconButton
           handleClick={handleExample}
           type="circle"
