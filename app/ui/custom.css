@@ -1,0 +1,75 @@
+.button--circle:hover .button__img {
+  display: none;
+}
+
+.button--circle:hover .button__text {
+  display: block;
+}
+
+.button--circle .button__img {
+  display: block;
+}
+
+.button--circle .button__text {
+  display: none;
+}
+
+.button--icon:hover svg path {
+  fill: #ffbf7e;
+}
+
+.button--iconSecondary svg path {
+  fill: #ffffff;
+}
+
+.button--iconSecondary:hover svg path {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+/* width */
+.card__text::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.card__text::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.card__text::-webkit-scrollbar-thumb {
+  background: #ff8911;
+  border-radius: 10px;
+}
+
+.card__text::-webkit-scrollbar {
+  width: 10px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background: #ff8911;
+  border-radius: 10px;
+}
+
+.cards-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+@keyframes alert {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+}
+
+.alert--animation {
+  animation: alert 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
