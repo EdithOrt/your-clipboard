@@ -1,4 +1,3 @@
-import { readClipboard } from "./lib/getClipboard";
 import { AlertsContainer } from "./ui/alerts-container";
 import { CardsContainer } from "./ui/cards-container";
 import { FooterContainer } from "./ui/footer-container";

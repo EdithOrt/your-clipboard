@@ -3,6 +3,7 @@ import { roboto } from "./ui/fonts";
 import "./globals.css";
 import { Navbar } from "./ui/navbar";
 import logo from "@/public/y-clipboard-logo.svg";
+import { ModalContainer } from "./ui/modal-container";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className={`${roboto.className} antialiased`}>
         <Navbar logo={logo} />
         {children}
+        <ModalContainer />
       </body>
     </html>
   );
