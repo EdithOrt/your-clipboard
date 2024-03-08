@@ -4,4 +4,4 @@ Disallow: /nogooglebot/
 User-agent: *
 Allow: /
 
-Sitemap: https://www.yourclipboard.com/sitemap.xml
+Sitemap: https://your-clipboard-46kgx2ejs-edithort.vercel.app/sitemap.xml
