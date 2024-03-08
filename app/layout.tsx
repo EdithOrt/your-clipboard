@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       "Copy and save the most important information in your clipboard",
   },
-  metadataBase: new URL("https://yourclipboard.com"),
+  metadataBase: new URL("https://your-clipboard-46kgx2ejs-edithort.vercel.app"),
   keywords: ["clipboard", "copy", "copy text", "save text copied"],
 };
 
