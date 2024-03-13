@@ -16,7 +16,7 @@ type Action = {
 };
 
 interface ClipboardDataInterface {
-  clipboardList: object;
+  clipboardList: Array<ClipboardData>;
   addClipboardItem: (item: ClipboardData) => void;
   deleteClipboardItem: (id: string) => void;
   updateClipboardItem: ({ id, action }: Action) => void;

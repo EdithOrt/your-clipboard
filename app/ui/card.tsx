@@ -6,9 +6,10 @@ import { SVGComponent } from "../lib/utils";
 interface CardProps {
   text: string;
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  date: string;
 }
 
-export function Card({ text, handleClick }: CardProps) {
+export function Card({ text, handleClick, date }: CardProps) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isCoppied, setIsCoppied] = useState<boolean>(false);
 
@@ -29,7 +30,7 @@ export function Card({ text, handleClick }: CardProps) {
       className={`${manjari.className} card text h-44 rounded-2xl border border-orange bg-white px-5 py-3.5 text-xs`}
     >
       <div className="mb-2 flex justify-between font-bold">
-        <p>MM/DD/YY</p>
+        <p>{date}</p>
 
         <IconButton
           variant="default"
@@ -43,7 +44,7 @@ export function Card({ text, handleClick }: CardProps) {
       </div>
 
       <div className="card__text h-[60%] overflow-auto">
-        <p>{text}</p>
+        <p className="break-words">{text}</p>
       </div>
 
       <div className="mr-3 mt-2 flex justify-end gap-2.5">
