@@ -1,5 +1,6 @@
 "use client";
 
+import { createID } from "@/app/lib/utils";
 import { createContext, useState } from "react";
 
 interface ClipboardData {
@@ -15,11 +16,18 @@ type Action = {
   action: "copy";
 };
 
+interface AlertState {
+  message: string;
+  id: string;
+}
+
 interface ClipboardDataInterface {
   clipboardList: Array<ClipboardData>;
   addClipboardItem: (item: ClipboardData) => void;
   deleteClipboardItem: (id: string) => void;
   updateClipboardItem: ({ id, action }: Action) => void;
+  alertList: Array<AlertState>;
+  deleteAlertItem: (id: string) => void;
 }
 
 const ClipboardDataContext = createContext<ClipboardDataInterface>({
@@ -27,12 +35,29 @@ const ClipboardDataContext = createContext<ClipboardDataInterface>({
   addClipboardItem: (item: ClipboardData) => {},
   deleteClipboardItem: (id: string) => {},
   updateClipboardItem: ({ id, action }: Action) => {},
+  alertList: [],
+  deleteAlertItem: (id) => {},
 });
 
 const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [clipboardList, setClipboardList] = useState<Array<ClipboardData>>([]);
+  const [alertList, setAlertList] = useState<Array<AlertState>>([]);
+
+  const isInvalidClipboardItem = ({
+    clipboardList,
+    text,
+  }: {
+    clipboardList: Array<ClipboardData>;
+    text: string;
+  }): boolean => {
+    const isExists = clipboardList.some((itemList) => {
+      return itemList.text === text;
+    });
+
+    return isExists;
+  };
 
   const addClipboardItem = (item: ClipboardData) => {
     const newClipboardList = [...clipboardList, item];
@@ -47,14 +72,32 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const updateClipboardItem = ({ id, action }: Action) => {
-    const updateClipboardList = clipboardList.map((clipboardItem) => {
-      if (clipboardItem.id === id) {
-        return { ...clipboardItem, [action]: !clipboardItem[action] };
-      }
-      return clipboardItem;
+    if (!isInvalidClipboardItem) {
+      const updateClipboardList = clipboardList.map((clipboardItem) => {
+        if (clipboardItem.id === id) {
+          return { ...clipboardItem, [action]: !clipboardItem[action] };
+        }
+        return clipboardItem;
+      });
+
+      setClipboardList(updateClipboardList);
+    } else {
+      setAlertList([
+        ...alertList,
+        {
+          message: "Text not saved because already exists",
+          id: createID(),
+        },
+      ]);
+    }
+  };
+
+  const deleteAlertItem = (id: string) => {
+    const deleteAlert = alertList.filter((alertItem) => {
+      alertItem.id === id;
     });
 
-    setClipboardList(updateClipboardList);
+    setAlertList(deleteAlert);
   };
 
   const data = {
@@ -62,6 +105,8 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     addClipboardItem,
     deleteClipboardItem,
     updateClipboardItem,
+    alertList,
+    deleteAlertItem,
   };
   return (
     <ClipboardDataContext.Provider value={data}>
