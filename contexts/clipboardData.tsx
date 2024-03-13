@@ -15,14 +15,19 @@ type Action = {
   action: "copy";
 };
 
-interface ClipboardDataContext {
+interface ClipboardDataInterface {
   clipboardList: object;
   addClipboardItem: (item: ClipboardData) => void;
   deleteClipboardItem: (id: string) => void;
   updateClipboardItem: ({ id, action }: Action) => void;
 }
 
-const ClipboardDataContext = createContext<ClipboardDataContext | null>(null);
+const ClipboardDataContext = createContext<ClipboardDataInterface>({
+  clipboardList: [],
+  addClipboardItem: (item: ClipboardData) => {},
+  deleteClipboardItem: (id: string) => {},
+  updateClipboardItem: ({ id, action }: Action) => {},
+});
 
 const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -64,5 +69,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     </ClipboardDataContext.Provider>
   );
 };
+
+export type { ClipboardDataInterface };
 
 export { ClipboardDataContext, ClipboardDataProvider };

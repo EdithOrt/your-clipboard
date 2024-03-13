@@ -1,10 +1,14 @@
-export const readClipboard = async () => {
-  navigator.clipboard
-    .readText()
-    .then((text) => {
-      console.log("Texto del portapapeles:", text);
-    })
-    .catch((err) => {
-      console.error("Error al leer del portapapeles:", err);
-    });
+type getClipboard = {
+  text: string;
+  error: string;
+};
+
+export const readClipboard = async (): Promise<getClipboard> => {
+  try {
+    const text = await navigator.clipboard.readText();
+    return { text: text, error: "" };
+  } catch (error) {
+    console.error("Failed to read text from clipboard:", error);
+    return { text: "", error: "Failed to read text from clipboard:" };
+  }
 };

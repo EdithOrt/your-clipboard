@@ -1,17 +1,40 @@
 "use client";
 
+import { useContext } from "react";
 import { TextButton, IconButton } from "@/app/ui/button";
-import trashIcon from "@/public/trash-icon.svg";
 import { SVGComponent } from "../lib/utils";
 import { readClipboard } from "../lib/getClipboard";
+import { ClipboardDataContext } from "@/contexts/clipboardData";
+import { useEffect } from "react";
 
 export function FooterContainer() {
-  const addText = () => {
-    readClipboard();
+  const { clipboardList, addClipboardItem } = useContext(ClipboardDataContext);
+
+  const addText = async () => {
+    try {
+      const clipboardText = await readClipboard();
+      const currentDate = new Date().toLocaleDateString();
+
+      addClipboardItem({
+        text: clipboardText.text,
+        date: currentDate,
+        favorite: false,
+        copy: false,
+        id: "adcac",
+      });
+    } catch (error) {
+      console.error("Failed to get text from clipboard:", error);
+    }
   };
   const handleExample = () => {
     console.log("hi");
   };
+
+  useEffect(() => {
+    console.log({ clipboardList });
+    return () => {};
+  }, [clipboardList]);
+
   return (
     <footer className="mt-4 grid w-full grid-cols-3 ">
       <div className="flex gap-x-4 self-start">
