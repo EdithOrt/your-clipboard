@@ -170,3 +170,7 @@ interface SVGProps {
 export const SVGComponent: React.FC<SVGProps> = ({ width, height, icon }) => {
   return <>{getIcon(icon)}</>;
 };
+
+export const createID = (): string => {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+};

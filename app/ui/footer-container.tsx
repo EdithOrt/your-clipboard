@@ -7,6 +7,7 @@ import { readClipboard } from "../lib/getClipboard";
 import { ClipboardDataContext } from "@/contexts/clipboardData";
 import { useEffect } from "react";
 import moment from "moment";
+import { createID } from "../lib/utils";
 
 export function FooterContainer() {
   const { clipboardList, addClipboardItem } = useContext(ClipboardDataContext);
@@ -21,7 +22,7 @@ export function FooterContainer() {
         date: currentDate,
         favorite: false,
         copy: false,
-        id: "adcac",
+        id: createID(),
       });
     } catch (error) {
       console.error("Failed to get text from clipboard:", error);
