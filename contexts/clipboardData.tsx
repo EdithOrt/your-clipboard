@@ -1,26 +1,25 @@
 "use client";
 
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useState,
-} from "react";
+import { createContext, useState } from "react";
 
 interface ClipboardData {
   date: string;
   text: string;
   favorite: boolean;
   id: string;
-  copy?: boolean;
+  copy: boolean;
 }
+
+type Action = {
+  id: "string";
+  action: "copy";
+};
 
 interface ClipboardDataContext {
   clipboardList: object;
   addClipboardItem: (item: ClipboardData) => void;
   deleteClipboardItem: (id: string) => void;
-  updateFavoriteItem: (id: string) => void;
+  updateClipboardItem: ({ id, action }: Action) => void;
 }
 
 const ClipboardDataContext = createContext<ClipboardDataContext | null>(null);
@@ -42,10 +41,10 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     setClipboardList(updateClipboardList);
   };
 
-  const updateFavoriteItem = (id: string) => {
+  const updateClipboardItem = ({ id, action }: Action) => {
     const updateClipboardList = clipboardList.map((clipboardItem) => {
       if (clipboardItem.id === id) {
-        return { ...clipboardItem, favorite: !clipboardItem.favorite };
+        return { ...clipboardItem, [action]: !clipboardItem[action] };
       }
       return clipboardItem;
     });
@@ -57,7 +56,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     clipboardList,
     addClipboardItem,
     deleteClipboardItem,
-    updateFavoriteItem,
+    updateClipboardItem,
   };
   return (
     <ClipboardDataContext.Provider value={data}>
