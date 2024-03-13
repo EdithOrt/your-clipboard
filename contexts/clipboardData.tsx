@@ -3,7 +3,7 @@
 import { createContext, useState } from "react";
 
 interface ClipboardData {
-  date: string;
+  date: number;
   text: string;
   favorite: boolean;
   id: string;

@@ -15,7 +15,7 @@ export function FooterContainer() {
   const addText = async () => {
     try {
       const clipboardText = await readClipboard();
-      const currentDate = moment().format("LLL");
+      const currentDate = moment().unix();
 
       addClipboardItem({
         text: clipboardText.text,
