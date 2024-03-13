@@ -6,6 +6,7 @@ import { SVGComponent } from "../lib/utils";
 import { readClipboard } from "../lib/getClipboard";
 import { ClipboardDataContext } from "@/contexts/clipboardData";
 import { useEffect } from "react";
+import moment from "moment";
 
 export function FooterContainer() {
   const { clipboardList, addClipboardItem } = useContext(ClipboardDataContext);
@@ -13,7 +14,7 @@ export function FooterContainer() {
   const addText = async () => {
     try {
       const clipboardText = await readClipboard();
-      const currentDate = new Date().toLocaleDateString();
+      const currentDate = moment().format("LLL");
 
       addClipboardItem({
         text: clipboardText.text,
