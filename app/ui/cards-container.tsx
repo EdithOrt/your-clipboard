@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card } from "./card";
 import { readClipboard } from "../lib/getClipboard";
 import { EmptyState } from "./empty-state";
@@ -14,7 +14,8 @@ interface ClipboardData {
 }
 
 export function CardsContainer() {
-  const { clipboardList } = useContext(ClipboardDataContext);
+  const { clipboardList, getSessionStorageData, updateClipboardItem } =
+    useContext(ClipboardDataContext);
 
   const handleClick = () => {
     return console.log("click to close");
@@ -23,6 +24,12 @@ export function CardsContainer() {
   const handleExample = () => {
     return console.log("hi");
   };
+
+  useEffect(() => {
+    getSessionStorageData("clipboardData");
+
+    return () => {};
+  }, []);
 
   return (
     <article className="h-[70vh] rounded-2xl border bg-orange-light pb-2 pr-2 pt-2">

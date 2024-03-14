@@ -6,7 +6,7 @@ interface AlertProps {
   type: "error" | "warning" | "success";
   text: string;
   handleAlert: React.MouseEventHandler<HTMLButtonElement>;
-  alertState: string;
+  alertState: boolean;
 }
 
 export function Alert({ type, text, handleAlert, alertState }: AlertProps) {
@@ -18,7 +18,7 @@ export function Alert({ type, text, handleAlert, alertState }: AlertProps) {
           "bg-red-400": type === "error",
           "bg-green-400": type === "success",
           "bg-yellow-400": type === "warning",
-          "alert--animation": alertState === "closing",
+          "alert--animation": alertState === false,
         },
       )}
     >
