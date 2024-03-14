@@ -7,22 +7,12 @@ import { EmptyState } from "./empty-state";
 import { ClipboardDataContext } from "@/contexts/clipboardData";
 import moment from "moment";
 
-interface ClipboardData {
-  text: string;
-  date: Date;
-  favorite: boolean;
-}
-
 export function CardsContainer() {
   const { clipboardList, getSessionStorageData, updateClipboardItem } =
     useContext(ClipboardDataContext);
 
   const handleClick = () => {
     return console.log("click to close");
-  };
-
-  const handleExample = () => {
-    return console.log("hi");
   };
 
   useEffect(() => {
@@ -43,6 +33,13 @@ export function CardsContainer() {
               text={clipboardItem.text}
               handleClick={handleClick}
               key={clipboardItem.id}
+              handleFavorites={() =>
+                updateClipboardItem({
+                  id: clipboardItem.id,
+                  action: "favorite",
+                })
+              }
+              isFavorite={clipboardItem.favorite}
             />
           ))
         )}

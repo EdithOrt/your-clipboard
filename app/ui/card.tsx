@@ -7,15 +7,18 @@ interface CardProps {
   text: string;
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
   date: string;
+  handleFavorites: React.MouseEventHandler<HTMLButtonElement>;
+  isFavorite: boolean;
 }
 
-export function Card({ text, handleClick, date }: CardProps) {
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+export function Card({
+  text,
+  handleClick,
+  date,
+  handleFavorites,
+  isFavorite,
+}: CardProps) {
   const [isCoppied, setIsCoppied] = useState<boolean>(false);
-
-  const updateFavorites = () => {
-    setIsFavorite(!isFavorite);
-  };
 
   const copyText = () => {
     setIsCoppied(!isCoppied);
@@ -51,7 +54,7 @@ export function Card({ text, handleClick, date }: CardProps) {
         <IconButton
           variant="default"
           type="default"
-          handleClick={updateFavorites}
+          handleClick={handleFavorites}
           style="primary"
         >
           {isFavorite ? (

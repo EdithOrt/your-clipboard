@@ -11,8 +11,8 @@ interface ClipboardData {
 }
 
 type Action = {
-  id: "string";
-  action: "copy";
+  id: string;
+  action: "copy" | "favorite";
 };
 
 interface AlertState {
@@ -149,6 +149,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const updateClipboardItem = ({ id, action }: Action) => {
+    console.log("execute updateClipboardItem");
     const updateClipboardList = clipboardList.map((clipboardItem) => {
       if (clipboardItem.id === id) {
         return { ...clipboardItem, [action]: !clipboardItem[action] };
