@@ -3,6 +3,7 @@ import { IconButton, TextButton } from "./button";
 import { manjari } from "./fonts";
 import { SVGComponent } from "../lib/utils";
 import clsx from "clsx";
+import { writeClipboard } from "../lib/updateClipboard";
 
 interface CardProps {
   text: string;
@@ -25,8 +26,10 @@ export function Card({
 }: CardProps) {
   const [isCoppied, setIsCoppied] = useState<boolean>(false);
 
-  const copyText = () => {
+  const copyText = (text: string) => {
     setIsCoppied(!isCoppied);
+
+    writeClipboard(text);
 
     setTimeout(() => {
       setIsCoppied(false);
@@ -61,7 +64,9 @@ export function Card({
           </div>
 
           <div className="card__text h-[60%] overflow-auto">
-            <p className="break-words">{text}</p>
+            <p className="break-words" id="copyText">
+              {text}
+            </p>
           </div>
 
           <div className="mr-3 mt-2 flex justify-end gap-2.5">
@@ -80,7 +85,7 @@ export function Card({
             <IconButton
               variant="tooltip"
               type="default"
-              handleClick={copyText}
+              handleClick={() => copyText(text)}
               expression="Coppied"
               tooltipState={isCoppied}
               style="primary"

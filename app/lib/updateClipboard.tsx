@@ -12,3 +12,11 @@ export const readClipboard = async (): Promise<getClipboard> => {
     return { text: "", error: "Failed to read text from clipboard:" };
   }
 };
+
+export const writeClipboard = async (text: string): Promise<any> => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (error) {
+    console.error(error);
+  }
+};

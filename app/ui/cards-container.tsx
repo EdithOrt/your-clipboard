@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { Card } from "./card";
-import { readClipboard } from "../lib/getClipboard";
+import { readClipboard } from "../lib/updateClipboard";
 import { EmptyState } from "./empty-state";
 import { ClipboardDataContext } from "@/contexts/clipboardData";
 import moment from "moment";

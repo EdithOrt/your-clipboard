@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import { TextButton, IconButton } from "@/app/ui/button";
 import { SVGComponent } from "../lib/utils";
-import { readClipboard } from "../lib/getClipboard";
+import { readClipboard } from "../lib/updateClipboard";
 import { ClipboardDataContext } from "@/contexts/clipboardData";
 import { useEffect } from "react";
 import moment from "moment";
