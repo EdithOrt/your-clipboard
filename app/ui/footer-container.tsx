@@ -42,12 +42,13 @@ export function FooterContainer() {
     } else {
       data = clipboardList;
     }
+    const date = moment().format("DDMMYYYY-hh:mm:ss");
     const element = document.createElement("a");
     const file = new Blob([getClipboardText(data)], {
       type: "data:text/plain;charset=utf-8,",
     });
     element.href = URL.createObjectURL(file);
-    element.download = "example.txt";
+    element.download = `your-clipboard${downloadFavorites ? "_favorites_" : "_"}${date}.txt`;
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   };
