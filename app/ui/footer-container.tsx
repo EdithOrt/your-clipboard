@@ -10,7 +10,8 @@ import moment from "moment";
 import { createID } from "../lib/utils";
 
 export function FooterContainer() {
-  const { clipboardList, addClipboardItem } = useContext(ClipboardDataContext);
+  const { clipboardList, addClipboardItem, deleteAllClipboardData } =
+    useContext(ClipboardDataContext);
 
   const addText = async () => {
     try {
@@ -69,10 +70,10 @@ export function FooterContainer() {
 
       <div className="mr-4 justify-self-end">
         <IconButton
-          handleClick={handleExample}
+          handleClick={() => deleteAllClipboardData()}
           type="circle"
           variant="default"
-          hoverText="Clear all"
+          hoverText="Delete all"
           style="primary"
         >
           <SVGComponent height="23" width="32" icon="trash-icon" />

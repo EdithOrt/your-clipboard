@@ -35,6 +35,7 @@ interface ClipboardDataInterface {
   getSessionStorageData: (name: string) => any;
   loader: boolean;
   setLoader: Dispatch<SetStateAction<boolean>>;
+  deleteAllClipboardData: () => void;
 }
 
 const ClipboardDataContext = createContext<ClipboardDataInterface>({
@@ -49,6 +50,7 @@ const ClipboardDataContext = createContext<ClipboardDataInterface>({
   getSessionStorageData: (name: string) => {},
   loader: true,
   setLoader: () => {},
+  deleteAllClipboardData: () => {},
 });
 
 const timer = 500;
@@ -85,6 +87,16 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     const stringifyList = JSON.stringify(clipboardData);
 
     sessionStorage.setItem("clipboardData", stringifyList);
+  };
+
+  const deleteAllClipboardData = () => {
+    setLoader(true);
+    setClipboardList([]);
+    sessionStorage.clear();
+
+    setTimeout(() => {
+      setLoader(false);
+    }, timer);
   };
 
   const addClipboardItem = (item: ClipboardData) => {
@@ -191,6 +203,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     getSessionStorageData,
     loader,
     setLoader,
+    deleteAllClipboardData,
   };
   return (
     <ClipboardDataContext.Provider value={data}>
