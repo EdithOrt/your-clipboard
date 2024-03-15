@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useState, Dispatch, SetStateAction } from "react";
+import moment from "moment";
 
 interface ClipboardData {
   date: number;
@@ -36,6 +37,7 @@ interface ClipboardDataInterface {
   loader: boolean;
   setLoader: Dispatch<SetStateAction<boolean>>;
   deleteAllClipboardData: () => void;
+  getClipboardText: (dataList: Array<ClipboardData>) => string;
 }
 
 const ClipboardDataContext = createContext<ClipboardDataInterface>({
@@ -51,6 +53,7 @@ const ClipboardDataContext = createContext<ClipboardDataInterface>({
   loader: true,
   setLoader: () => {},
   deleteAllClipboardData: () => {},
+  getClipboardText: (clipboardList: Array<ClipboardData>) => "",
 });
 
 const timer = 500;
@@ -191,6 +194,17 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     updateSessionStorage(updateClipboardList);
   };
 
+  const getClipboardText = (dataList: Array<ClipboardData>): string => {
+    // Array<string>
+    const stringsList = dataList.map((clipboardItem) => {
+      return `------ ${moment.unix(clipboardItem.date).format("LLL")} ------\n\n${clipboardItem.text}\n\n\n\n`;
+    });
+
+    const joinStrings = stringsList.join(" ");
+
+    return "Tanks for using YOUR CLIPBOARD\n\n\n\n" + joinStrings;
+  };
+
   const data = {
     clipboardList,
     addClipboardItem,
@@ -204,6 +218,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     loader,
     setLoader,
     deleteAllClipboardData,
+    getClipboardText,
   };
   return (
     <ClipboardDataContext.Provider value={data}>

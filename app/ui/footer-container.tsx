@@ -10,8 +10,12 @@ import moment from "moment";
 import { createID } from "../lib/utils";
 
 export function FooterContainer() {
-  const { clipboardList, addClipboardItem, deleteAllClipboardData } =
-    useContext(ClipboardDataContext);
+  const {
+    clipboardList,
+    addClipboardItem,
+    deleteAllClipboardData,
+    getClipboardText,
+  } = useContext(ClipboardDataContext);
 
   const addText = async () => {
     try {
@@ -30,8 +34,22 @@ export function FooterContainer() {
       console.error("Failed to get text from clipboard:", error);
     }
   };
-  const handleExample = () => {
-    console.log("hi");
+
+  const downloadTextFile = (downloadFavorites: boolean) => {
+    let data;
+    if (downloadFavorites) {
+      data = clipboardList.filter((clipboardItem) => clipboardItem.favorite);
+    } else {
+      data = clipboardList;
+    }
+    const element = document.createElement("a");
+    const file = new Blob([getClipboardText(data)], {
+      type: "data:text/plain;charset=utf-8,",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "example.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
   };
 
   useEffect(() => {
@@ -43,15 +61,15 @@ export function FooterContainer() {
     <footer className="mt-4 grid w-full grid-cols-3 ">
       <div className="flex gap-x-4 self-start">
         <TextButton
-          text="Default button"
-          type="default"
-          handleClick={handleExample}
+          text="Download all"
+          type="download"
+          handleClick={() => downloadTextFile(false)}
           style="secondary"
         />
         <TextButton
-          text="Default button"
-          type="default"
-          handleClick={handleExample}
+          text="Download favorites"
+          type="download"
+          handleClick={() => downloadTextFile(true)}
           style="secondary"
         />
       </div>

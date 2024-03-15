@@ -41,7 +41,19 @@ export function TextButton({
       </button>
     );
   } else if (type === "download") {
-    return <button onClick={handleClick}>{text}</button>;
+    return (
+      <button
+        onClick={handleClick}
+        className={clsx("rounded-3xl border px-8 py-2 text-base font-bold", {
+          "border-white text-white hover:bg-white hover:text-orange":
+            style === "primary",
+          "border-orange text-orange hover:bg-orange hover:text-white":
+            style === "secondary",
+        })}
+      >
+        {text}
+      </button>
+    );
   }
 }
 
