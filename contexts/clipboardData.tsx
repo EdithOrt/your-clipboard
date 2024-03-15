@@ -74,7 +74,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const deleteAlertItem = (id: string) => {
     const deleteAlert = alertList.filter((alertItem) => {
-      alertItem.id === id;
+      return alertItem.id !== id;
     });
 
     setAlertList(deleteAlert);
