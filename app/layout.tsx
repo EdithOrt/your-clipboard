@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "./ui/navbar";
 import logo from "@/public/y-clipboard-logo.svg";
 import { ModalContainer } from "./ui/modal-container";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Your Clipboard",
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.className} antialiased`}>
-        <Navbar logo={logo} />
-        {children}
-        <ModalContainer />
+        <Providers>
+          <Navbar logo={logo} />
+          {children}
+          <ModalContainer />
+        </Providers>
       </body>
     </html>
   );

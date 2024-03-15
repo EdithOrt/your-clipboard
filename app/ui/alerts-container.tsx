@@ -1,42 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Alert } from "./alert";
+import { ClipboardDataContext } from "@/contexts/clipboardData";
 
 export function AlertsContainer() {
   const [displayAlert, setDisplayAlert] = useState("open");
-  const handleExample = () => {
-    console.log("close alert");
-    setDisplayAlert("closing");
+  const { alertList, deleteAlertItem, getAlertAnimation, currentId } =
+    useContext(ClipboardDataContext);
 
-    setTimeout(() => {
-      setDisplayAlert("close");
-    }, 3500);
+  const handleExample = (id: string) => {
+    deleteAlertItem(id);
   };
+
   return (
     <div className="absolute right-4 z-20 flex flex-col gap-2.5">
-      {(displayAlert === "open" || displayAlert === "closing") && (
-        <>
-          <Alert
-            type="error"
-            text="Alert message!"
-            handleAlert={handleExample}
-            alertState={displayAlert}
-          />
-          <Alert
-            type="error"
-            text="Alert message!"
-            handleAlert={handleExample}
-            alertState={displayAlert}
-          />
-          <Alert
-            type="error"
-            text="Alert message!"
-            handleAlert={handleExample}
-            alertState={displayAlert}
-          />
-        </>
-      )}
+      {alertList.map((alertItem) => (
+        <Alert
+          type={alertItem.type}
+          text={alertItem.message}
+          handleAlert={() => handleExample(alertItem.id)}
+          alertState={alertItem.active}
+          key={alertItem.id}
+        />
+      ))}
     </div>
   );
 }

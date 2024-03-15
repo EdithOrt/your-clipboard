@@ -1,103 +1,70 @@
 "use client";
 
+import { useContext, useEffect, useState } from "react";
 import { Card } from "./card";
-import { readClipboard } from "../lib/getClipboard";
+import { readClipboard } from "../lib/updateClipboard";
+import { EmptyState } from "./empty-state";
+import { ClipboardDataContext } from "@/contexts/clipboardData";
+import moment from "moment";
+import { SVGComponent } from "../lib/utils";
 
 export function CardsContainer() {
-  /* document.addEventListener("copy", (e) => {
-    e.preventDefault();
-    const selectedText = window.getSelection().toString();
-    console.log({ selectedText });
-    readClipboard();
-  }); */
+  const {
+    clipboardList,
+    getSessionStorageData,
+    updateClipboardItem,
+    deleteClipboardItem,
+    loader,
+    setLoader,
+  } = useContext(ClipboardDataContext);
 
-  const handleClick = () => {
-    return console.log("click to close");
-  };
+  useEffect(() => {
+    getSessionStorageData("clipboardData");
 
-  const handleExample = () => {
-    return console.log("hi");
-  };
+    return () => {};
+  }, []);
+
   return (
     <article className="h-[70vh] rounded-2xl border bg-orange-light pb-2 pr-2 pt-2">
-      <div className="cards-container grid  h-full snap-start grid-cols-4 gap-5 overflow-y-auto px-4 pb-4 pt-4">
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />{" "}
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />{" "}
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-        <Card
-          text="Nam quis pretium libero. Curabitur in luctus ex. Praesent magna metus, gravida pretium sapien eu, condimentum porttitor purus. Praesent vitae arcu volutpat, commodo lectus congue, molestie massa. Aenean lobortis rhoncus risus id gravida. Sed vitae elit ornare leo efficitur vulputate et varius eros. Nam tristique lobortis nisl, et imperdiet odio rutrum in. Sed in erat non leo finibus tempor. Suspendisse purus risus, consequat vitae lacus eleifend, gravida congue felis. Fusce justo purus, eleifend at mattis quis, varius mollis sem. Pellentesque suscipit ex id justo rhoncus, nec pharetra diam laoreet. Pellentesque suscipit gravida nulla, vel sodales ante auctor quis. Cras mattis, diam eu rutrum viverra, urna libero elementum quam, nec vehicula ante leo sed ex. Sed eu ex elementum dolor facilisis accumsan. Nulla ornare neque nec tellus pellentesque hendrerit. Praesent hendrerit rhoncus maximus."
-          handleClick={handleClick}
-        />
-      </div>
+      {loader ? (
+        <div className="flex h-full w-full items-center justify-center">
+          <div role="status">
+            <SVGComponent width="213" height="123" icon="spin-icon" />
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="cards-container grid  h-full snap-start grid-cols-4 gap-5 overflow-y-auto px-4 pb-4 pt-4">
+            {!clipboardList.length ? (
+              <EmptyState text='Start by copying text and press the "+" (Add text) button' />
+            ) : (
+              clipboardList.map((clipboardItem) => (
+                <Card
+                  date={moment.unix(clipboardItem.date).format("LLL")}
+                  text={clipboardItem.text}
+                  handleClose={() =>
+                    updateClipboardItem({
+                      id: clipboardItem.id,
+                      action: "confirmDelete",
+                    })
+                  }
+                  key={clipboardItem.id}
+                  handleFavorites={() =>
+                    updateClipboardItem({
+                      id: clipboardItem.id,
+                      action: "favorite",
+                    })
+                  }
+                  isFavorite={clipboardItem.favorite}
+                  displayConfirmView={clipboardItem.confirmDelete}
+                  handleDelete={() => deleteClipboardItem(clipboardItem.id)}
+                />
+              ))
+            )}
+          </div>
+        </>
+      )}
     </article>
   );
 }
