@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useState, Dispatch, SetStateAction } from "react";
 
 interface ClipboardData {
   date: number;
@@ -8,11 +8,12 @@ interface ClipboardData {
   favorite: boolean;
   id: string;
   copy: boolean;
+  confirmDelete: boolean;
 }
 
 type Action = {
   id: string;
-  action: "copy" | "favorite";
+  action: "copy" | "favorite" | "confirmDelete";
 };
 
 interface AlertState {
@@ -32,6 +33,8 @@ interface ClipboardDataInterface {
   getAlertAnimation: (id: string) => void;
   currentId: string;
   getSessionStorageData: (name: string) => any;
+  loader: boolean;
+  setLoader: Dispatch<SetStateAction<boolean>>;
 }
 
 const ClipboardDataContext = createContext<ClipboardDataInterface>({
@@ -44,7 +47,11 @@ const ClipboardDataContext = createContext<ClipboardDataInterface>({
   getAlertAnimation: (id: string) => {},
   currentId: "",
   getSessionStorageData: (name: string) => {},
+  loader: true,
+  setLoader: () => {},
 });
+
+const timer = 500;
 
 const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -52,6 +59,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [clipboardList, setClipboardList] = useState<Array<ClipboardData>>([]);
   const [alertList, setAlertList] = useState<Array<AlertState>>([]);
   const [currentId, setCurrentId] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(true);
 
   const isInvalidClipboardItem = (
     clipboardList: Array<ClipboardData>,
@@ -131,25 +139,35 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const getSessionStorageData = (name: string) => {
+    setLoader(true);
     const data = sessionStorage.getItem(name);
 
     if (data) {
       const parseData = JSON.parse(data);
       setClipboardList(parseData);
     }
+
+    setTimeout(() => {
+      setLoader(false);
+    }, timer);
   };
 
   const deleteClipboardItem = (id: string) => {
+    setLoader(true);
     const updateClipboardList = clipboardList.filter((clipboardItem) => {
-      clipboardItem.id !== id;
+      return clipboardItem.id !== id;
     });
+
     setClipboardList(updateClipboardList);
 
     updateSessionStorage(updateClipboardList);
+
+    setTimeout(() => {
+      setLoader(false);
+    }, timer);
   };
 
   const updateClipboardItem = ({ id, action }: Action) => {
-    console.log("execute updateClipboardItem");
     const updateClipboardList = clipboardList.map((clipboardItem) => {
       if (clipboardItem.id === id) {
         return { ...clipboardItem, [action]: !clipboardItem[action] };
@@ -171,6 +189,8 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     getAlertAnimation,
     currentId,
     getSessionStorageData,
+    loader,
+    setLoader,
   };
   return (
     <ClipboardDataContext.Provider value={data}>

@@ -6,14 +6,17 @@ import { readClipboard } from "../lib/getClipboard";
 import { EmptyState } from "./empty-state";
 import { ClipboardDataContext } from "@/contexts/clipboardData";
 import moment from "moment";
+import { SVGComponent } from "../lib/utils";
 
 export function CardsContainer() {
-  const { clipboardList, getSessionStorageData, updateClipboardItem } =
-    useContext(ClipboardDataContext);
-
-  const handleClick = () => {
-    return console.log("click to close");
-  };
+  const {
+    clipboardList,
+    getSessionStorageData,
+    updateClipboardItem,
+    deleteClipboardItem,
+    loader,
+    setLoader,
+  } = useContext(ClipboardDataContext);
 
   useEffect(() => {
     getSessionStorageData("clipboardData");
@@ -23,27 +26,45 @@ export function CardsContainer() {
 
   return (
     <article className="h-[70vh] rounded-2xl border bg-orange-light pb-2 pr-2 pt-2">
-      <div className="cards-container grid  h-full snap-start grid-cols-4 gap-5 overflow-y-auto px-4 pb-4 pt-4">
-        {!clipboardList.length ? (
-          <EmptyState text='Start by copying text and press the "+" (Add text) button' />
-        ) : (
-          clipboardList.map((clipboardItem) => (
-            <Card
-              date={moment.unix(clipboardItem.date).format("LLL")}
-              text={clipboardItem.text}
-              handleClick={handleClick}
-              key={clipboardItem.id}
-              handleFavorites={() =>
-                updateClipboardItem({
-                  id: clipboardItem.id,
-                  action: "favorite",
-                })
-              }
-              isFavorite={clipboardItem.favorite}
-            />
-          ))
-        )}
-      </div>
+      {loader ? (
+        <div className="flex h-full w-full items-center justify-center">
+          <div role="status">
+            <SVGComponent width="213" height="123" icon="spin-icon" />
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="cards-container grid  h-full snap-start grid-cols-4 gap-5 overflow-y-auto px-4 pb-4 pt-4">
+            {!clipboardList.length ? (
+              <EmptyState text='Start by copying text and press the "+" (Add text) button' />
+            ) : (
+              clipboardList.map((clipboardItem) => (
+                <Card
+                  date={moment.unix(clipboardItem.date).format("LLL")}
+                  text={clipboardItem.text}
+                  handleClose={() =>
+                    updateClipboardItem({
+                      id: clipboardItem.id,
+                      action: "confirmDelete",
+                    })
+                  }
+                  key={clipboardItem.id}
+                  handleFavorites={() =>
+                    updateClipboardItem({
+                      id: clipboardItem.id,
+                      action: "favorite",
+                    })
+                  }
+                  isFavorite={clipboardItem.favorite}
+                  displayConfirmView={clipboardItem.confirmDelete}
+                  handleDelete={() => deleteClipboardItem(clipboardItem.id)}
+                />
+              ))
+            )}
+          </div>
+        </>
+      )}
     </article>
   );
 }

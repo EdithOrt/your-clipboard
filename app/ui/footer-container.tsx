@@ -23,6 +23,7 @@ export function FooterContainer() {
         favorite: false,
         copy: false,
         id: createID(),
+        confirmDelete: false,
       });
     } catch (error) {
       console.error("Failed to get text from clipboard:", error);
