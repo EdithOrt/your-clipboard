@@ -35,6 +35,12 @@ export function FooterContainer() {
     }
   };
 
+  const hasFavorites = (clipboardList: any) => {
+    return clipboardList.some((clipboardItem: any) => {
+      return clipboardItem.favorite;
+    });
+  };
+
   const downloadTextFile = (downloadFavorites: boolean) => {
     let data;
     if (downloadFavorites) {
@@ -60,20 +66,26 @@ export function FooterContainer() {
 
   return (
     <footer className="mt-4 grid w-full grid-cols-3 ">
-      <div className="flex gap-x-4 self-start">
-        <TextButton
-          text="Download all"
-          type="download"
-          handleClick={() => downloadTextFile(false)}
-          style="secondary"
-        />
-        <TextButton
-          text="Download favorites"
-          type="download"
-          handleClick={() => downloadTextFile(true)}
-          style="secondary"
-        />
-      </div>
+      {clipboardList.length ? (
+        <div className="flex gap-x-4 self-start">
+          <TextButton
+            text="Download all"
+            type="download"
+            handleClick={() => downloadTextFile(false)}
+            style="secondary"
+          />
+          {hasFavorites(clipboardList) && (
+            <TextButton
+              text="Download favorites"
+              type="download"
+              handleClick={() => downloadTextFile(true)}
+              style="secondary"
+            />
+          )}
+        </div>
+      ) : (
+        <span />
+      )}
 
       <div className="self-center justify-self-center">
         <IconButton
@@ -87,17 +99,21 @@ export function FooterContainer() {
         </IconButton>
       </div>
 
-      <div className="mr-4 justify-self-end">
-        <IconButton
-          handleClick={() => deleteAllClipboardData()}
-          type="circle"
-          variant="default"
-          hoverText="Delete all"
-          style="primary"
-        >
-          <SVGComponent height="23" width="32" icon="trash-icon" />
-        </IconButton>
-      </div>
+      {clipboardList.length ? (
+        <div className="mr-4 justify-self-end">
+          <IconButton
+            handleClick={() => deleteAllClipboardData()}
+            type="circle"
+            variant="default"
+            hoverText="Delete all"
+            style="primary"
+          >
+            <SVGComponent height="23" width="32" icon="trash-icon" />
+          </IconButton>
+        </div>
+      ) : (
+        <span />
+      )}
     </footer>
   );
 }
