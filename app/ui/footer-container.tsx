@@ -16,6 +16,7 @@ export function FooterContainer() {
     deleteAllClipboardData,
     getClipboardText,
     handleModal,
+    updateAlertList,
   } = useContext(ClipboardDataContext);
 
   const addText = async () => {
@@ -23,14 +24,23 @@ export function FooterContainer() {
       const clipboardText = await readClipboard();
       const currentDate = moment().unix();
 
-      addClipboardItem({
-        text: clipboardText.text,
-        date: currentDate,
-        favorite: false,
-        copy: false,
-        id: createID(),
-        confirmDelete: false,
-      });
+      if (clipboardText?.text !== "") {
+        addClipboardItem({
+          text: clipboardText.text,
+          date: currentDate,
+          favorite: false,
+          copy: false,
+          id: createID(),
+          confirmDelete: false,
+        });
+      } else {
+        updateAlertList({
+          message: "There is no text to add",
+          id: createID(),
+          type: "error",
+          active: true,
+        });
+      }
     } catch (error) {
       console.error("Failed to get text from clipboard:", error);
     }

@@ -40,6 +40,7 @@ interface ClipboardDataInterface {
   getClipboardText: (dataList: Array<ClipboardData>) => string;
   handleModal: () => void;
   modal: boolean;
+  updateAlertList: (data: AlertState) => void;
 }
 
 const ClipboardDataContext = createContext<ClipboardDataInterface>({
@@ -58,6 +59,7 @@ const ClipboardDataContext = createContext<ClipboardDataInterface>({
   getClipboardText: (clipboardList: Array<ClipboardData>) => "",
   handleModal: () => {},
   modal: false,
+  updateAlertList: (data: AlertState) => {},
 });
 
 const timer = 500;
@@ -216,6 +218,10 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     return "Tanks for using YOUR CLIPBOARD\n\n\n\n" + joinStrings;
   };
 
+  const updateAlertList = (data: AlertState) => {
+    setAlertList([...alertList, data]);
+  };
+
   const data = {
     clipboardList,
     addClipboardItem,
@@ -232,6 +238,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     getClipboardText,
     handleModal,
     modal,
+    updateAlertList,
   };
   return (
     <ClipboardDataContext.Provider value={data}>
