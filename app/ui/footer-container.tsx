@@ -15,6 +15,7 @@ export function FooterContainer() {
     addClipboardItem,
     deleteAllClipboardData,
     getClipboardText,
+    handleModal,
   } = useContext(ClipboardDataContext);
 
   const addText = async () => {
@@ -102,7 +103,7 @@ export function FooterContainer() {
       {clipboardList.length ? (
         <div className="mr-4 justify-self-end">
           <IconButton
-            handleClick={() => deleteAllClipboardData()}
+            handleClick={() => handleModal()}
             type="circle"
             variant="default"
             hoverText="Delete all"

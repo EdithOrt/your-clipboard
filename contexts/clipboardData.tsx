@@ -38,6 +38,8 @@ interface ClipboardDataInterface {
   setLoader: Dispatch<SetStateAction<boolean>>;
   deleteAllClipboardData: () => void;
   getClipboardText: (dataList: Array<ClipboardData>) => string;
+  handleModal: () => void;
+  modal: boolean;
 }
 
 const ClipboardDataContext = createContext<ClipboardDataInterface>({
@@ -54,6 +56,8 @@ const ClipboardDataContext = createContext<ClipboardDataInterface>({
   setLoader: () => {},
   deleteAllClipboardData: () => {},
   getClipboardText: (clipboardList: Array<ClipboardData>) => "",
+  handleModal: () => {},
+  modal: false,
 });
 
 const timer = 500;
@@ -65,6 +69,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [alertList, setAlertList] = useState<Array<AlertState>>([]);
   const [currentId, setCurrentId] = useState<string>("");
   const [loader, setLoader] = useState<boolean>(true);
+  const [modal, setModal] = useState<boolean>(false);
 
   const isInvalidClipboardItem = (
     clipboardList: Array<ClipboardData>,
@@ -96,6 +101,8 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoader(true);
     setClipboardList([]);
     sessionStorage.clear();
+
+    setModal(!modal);
 
     setTimeout(() => {
       setLoader(false);
@@ -182,6 +189,10 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     }, timer);
   };
 
+  const handleModal = () => {
+    setModal(!modal);
+  };
+
   const updateClipboardItem = ({ id, action }: Action) => {
     const updateClipboardList = clipboardList.map((clipboardItem) => {
       if (clipboardItem.id === id) {
@@ -219,6 +230,8 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoader,
     deleteAllClipboardData,
     getClipboardText,
+    handleModal,
+    modal,
   };
   return (
     <ClipboardDataContext.Provider value={data}>
