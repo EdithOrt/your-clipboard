@@ -15,6 +15,8 @@ export function FooterContainer() {
     addClipboardItem,
     deleteAllClipboardData,
     getClipboardText,
+    handleModal,
+    updateAlertList,
   } = useContext(ClipboardDataContext);
 
   const addText = async () => {
@@ -22,17 +24,32 @@ export function FooterContainer() {
       const clipboardText = await readClipboard();
       const currentDate = moment().unix();
 
-      addClipboardItem({
-        text: clipboardText.text,
-        date: currentDate,
-        favorite: false,
-        copy: false,
-        id: createID(),
-        confirmDelete: false,
-      });
+      if (clipboardText?.text !== "") {
+        addClipboardItem({
+          text: clipboardText.text,
+          date: currentDate,
+          favorite: false,
+          copy: false,
+          id: createID(),
+          confirmDelete: false,
+        });
+      } else {
+        updateAlertList({
+          message: "There is no text to add",
+          id: createID(),
+          type: "error",
+          active: true,
+        });
+      }
     } catch (error) {
       console.error("Failed to get text from clipboard:", error);
     }
+  };
+
+  const hasFavorites = (clipboardList: any) => {
+    return clipboardList.some((clipboardItem: any) => {
+      return clipboardItem.favorite;
+    });
   };
 
   const downloadTextFile = (downloadFavorites: boolean) => {
@@ -60,20 +77,26 @@ export function FooterContainer() {
 
   return (
     <footer className="mt-4 grid w-full grid-cols-3 ">
-      <div className="flex gap-x-4 self-start">
-        <TextButton
-          text="Download all"
-          type="download"
-          handleClick={() => downloadTextFile(false)}
-          style="secondary"
-        />
-        <TextButton
-          text="Download favorites"
-          type="download"
-          handleClick={() => downloadTextFile(true)}
-          style="secondary"
-        />
-      </div>
+      {clipboardList.length ? (
+        <div className="flex gap-x-4 self-start">
+          <TextButton
+            text="Download all"
+            type="download"
+            handleClick={() => downloadTextFile(false)}
+            style="secondary"
+          />
+          {hasFavorites(clipboardList) && (
+            <TextButton
+              text="Download favorites"
+              type="download"
+              handleClick={() => downloadTextFile(true)}
+              style="secondary"
+            />
+          )}
+        </div>
+      ) : (
+        <span />
+      )}
 
       <div className="self-center justify-self-center">
         <IconButton
@@ -87,17 +110,21 @@ export function FooterContainer() {
         </IconButton>
       </div>
 
-      <div className="mr-4 justify-self-end">
-        <IconButton
-          handleClick={() => deleteAllClipboardData()}
-          type="circle"
-          variant="default"
-          hoverText="Delete all"
-          style="primary"
-        >
-          <SVGComponent height="23" width="32" icon="trash-icon" />
-        </IconButton>
-      </div>
+      {clipboardList.length ? (
+        <div className="mr-4 justify-self-end">
+          <IconButton
+            handleClick={() => handleModal()}
+            type="circle"
+            variant="default"
+            hoverText="Delete all"
+            style="primary"
+          >
+            <SVGComponent height="23" width="32" icon="trash-icon" />
+          </IconButton>
+        </div>
+      ) : (
+        <span />
+      )}
     </footer>
   );
 }
