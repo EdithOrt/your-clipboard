@@ -97,19 +97,9 @@ export function Card({
       ) : (
         <>
           <p className="text-center text-2xl">Are you sure to delete it?</p>
-          <TextButton
-            text="Yes"
-            handleClick={handleDelete}
-            type="default"
-            style="primary"
-          />
+          <TextButton text="Yes" handleClick={handleDelete} style="primary" />
 
-          <TextButton
-            text="No"
-            handleClick={handleClose}
-            type="default"
-            style="primary"
-          />
+          <TextButton text="No" handleClick={handleClose} style="primary" />
         </>
       )}
     </section>

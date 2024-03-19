@@ -10,7 +10,7 @@ export function ModalContainer() {
     useContext(ClipboardDataContext);
 
   return (
-    <Modal isOpen={modal}>
+    <Modal isOpen={modal} handleClose={() => handleModal()}>
       <p className="text-center">Are you sure to delete all?</p>
 
       <div className="flex gap-x-10 sm:gap-x-28">

@@ -8,12 +8,10 @@ import clsx from "clsx";
 interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
+  handleClose: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>;
 }
 
-export function Modal({ children, isOpen }: ModalProps) {
-  const handleClick = () => {
-    console.log("Close modal");
-  };
+export function Modal({ children, isOpen, handleClose }: ModalProps) {
   return (
     <div
       className={clsx(
@@ -21,13 +19,13 @@ export function Modal({ children, isOpen }: ModalProps) {
         { hidden: isOpen === false },
         { flex: isOpen === true },
       )}
-      onClick={handleClick}
+      onClick={handleClose}
     >
       <div className="flex h-80 w-5/6 flex-col items-center rounded-2xl bg-white p-4  md:w-2/4 ">
         <div className="self-end">
           <IconButton
             type="default"
-            handleClick={handleClick}
+            handleClick={handleClose}
             variant="default"
             style="primary"
           >
