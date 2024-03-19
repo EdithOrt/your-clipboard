@@ -13,7 +13,7 @@ export function Alert({ type, text, handleAlert, alertState }: AlertProps) {
   return (
     <div
       className={clsx(
-        "flex gap-3.5 rounded-lg px-3.5 py-2 text-white shadow-xl",
+        "flex gap-3.5 rounded-lg px-3.5 py-2 text-xs text-white shadow-xl md:text-base",
         {
           "bg-red-400": type === "error",
           "bg-green-400": type === "success",

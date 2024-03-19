@@ -76,29 +76,44 @@ export function FooterContainer() {
   }, [clipboardList]);
 
   return (
-    <footer className="mt-4 grid w-full grid-cols-3 ">
+    <footer className="mt-4 grid w-full grid-cols-9">
       {clipboardList.length ? (
-        <div className="flex gap-x-4 self-start">
-          <TextButton
-            text="Download all"
-            type="download"
-            handleClick={() => downloadTextFile(false)}
-            style="secondary"
-          />
-          {hasFavorites(clipboardList) && (
+        <div className="col-start-1 col-end-5 flex gap-x-4 self-start">
+          <div className="hidden md:block">
             <TextButton
-              text="Download favorites"
-              type="download"
-              handleClick={() => downloadTextFile(true)}
+              text="Download all"
+              handleClick={() => downloadTextFile(false)}
               style="secondary"
             />
-          )}
+          </div>
+
+          <div className="block md:hidden">
+            <IconButton
+              handleClick={() => downloadTextFile(false)}
+              type="circle"
+              variant="default"
+              hoverText="Download all"
+              style="primary"
+            >
+              <SVGComponent width="23" height="32" icon="download-icon" />
+            </IconButton>
+          </div>
+
+          <div className="min-[320px]:hidden lg:block">
+            {hasFavorites(clipboardList) && (
+              <TextButton
+                text="Download favorites"
+                handleClick={() => downloadTextFile(true)}
+                style="secondary"
+              />
+            )}
+          </div>
         </div>
       ) : (
         <span />
       )}
 
-      <div className="self-center justify-self-center">
+      <div className="col-start-5 col-end-6 self-center justify-self-center">
         <IconButton
           handleClick={addText}
           type="circle"
@@ -111,7 +126,7 @@ export function FooterContainer() {
       </div>
 
       {clipboardList.length ? (
-        <div className="mr-4 justify-self-end">
+        <div className="col-start-6 col-end-10 mr-4 justify-self-end">
           <IconButton
             handleClick={() => handleModal()}
             type="circle"
