@@ -17,13 +17,13 @@ export function Modal({ children, isOpen }: ModalProps) {
   return (
     <div
       className={clsx(
-        "bg-black absolute top-0 z-30 h-screen w-screen items-center justify-center bg-opacity-50",
+        "absolute top-0 z-30 h-screen w-screen items-center justify-center bg-black bg-opacity-50 ",
         { hidden: isOpen === false },
         { flex: isOpen === true },
       )}
       onClick={handleClick}
     >
-      <div className="flex h-80 w-2/4 flex-col items-center rounded-2xl bg-white p-4">
+      <div className="flex h-80 w-5/6 flex-col items-center rounded-2xl bg-white p-4  md:w-2/4 ">
         <div className="self-end">
           <IconButton
             type="default"

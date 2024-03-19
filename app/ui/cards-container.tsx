@@ -7,6 +7,7 @@ import { EmptyState } from "./empty-state";
 import { ClipboardDataContext } from "@/contexts/clipboardData";
 import moment from "moment";
 import { SVGComponent } from "../lib/utils";
+import clsx from "clsx";
 
 export function CardsContainer() {
   const {
@@ -35,7 +36,15 @@ export function CardsContainer() {
         </div>
       ) : (
         <>
-          <div className="cards-container grid  h-full snap-start grid-cols-4 gap-5 overflow-y-auto px-4 pb-4 pt-4">
+          <div
+            className={clsx(
+              "cards-container grid max-h-full snap-start gap-5 overflow-y-auto px-4 pb-4 pt-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+              {
+                "h-auto": clipboardList.length,
+                "h-full": !clipboardList.length,
+              },
+            )}
+          >
             {!clipboardList.length ? (
               <EmptyState text='Start by copying text and press the "+" (Add text) button' />
             ) : (

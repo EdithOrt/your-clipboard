@@ -11,9 +11,9 @@ export function ModalContainer() {
 
   return (
     <Modal isOpen={modal}>
-      <p>Are you sure to delete all?</p>
+      <p className="text-center">Are you sure to delete all?</p>
 
-      <div className="flex gap-x-28">
+      <div className="flex gap-x-10 sm:gap-x-28">
         <TextButton
           text="Yes"
           handleClick={() => deleteAllClipboardData()}
