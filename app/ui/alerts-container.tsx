@@ -14,7 +14,7 @@ export function AlertsContainer() {
   };
 
   return (
-    <div className="absolute right-4 z-20 flex flex-col gap-2.5">
+    <div className="absolute right-4 z-20 flex flex-col items-end gap-2.5">
       {alertList.map((alertItem) => (
         <Alert
           type={alertItem.type}
