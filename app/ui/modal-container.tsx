@@ -17,7 +17,6 @@ export function ModalContainer() {
         <TextButton
           text="Yes"
           handleClick={() => deleteAllClipboardData()}
-          type="default"
           style="secondary"
         />
 
@@ -26,7 +25,6 @@ export function ModalContainer() {
           handleClick={() => {
             handleModal();
           }}
-          type="default"
           style="secondary"
         />
       </div>

@@ -5,7 +5,6 @@ import { ReactNode } from "react";
 interface TextButtonProps {
   text: string;
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
-  type: "download" | "default";
   style: "primary" | "secondary";
 }
 
@@ -20,41 +19,20 @@ interface IconButtonProps {
   style: "primary" | "secondary";
 }
 
-export function TextButton({
-  text,
-  handleClick,
-  type,
-  style,
-}: TextButtonProps) {
-  if (type === "default") {
-    return (
-      <button
-        className={clsx("rounded-3xl border px-8 py-2 text-base font-bold", {
-          "border-white text-white hover:bg-white hover:text-orange":
-            style === "primary",
-          "border-orange text-orange hover:bg-orange hover:text-white":
-            style === "secondary",
-        })}
-        onClick={handleClick}
-      >
-        {text}
-      </button>
-    );
-  } else if (type === "download") {
-    return (
-      <button
-        onClick={handleClick}
-        className={clsx("rounded-3xl border px-8 py-2 text-base font-bold", {
-          "border-white text-white hover:bg-white hover:text-orange":
-            style === "primary",
-          "border-orange text-orange hover:bg-orange hover:text-white":
-            style === "secondary",
-        })}
-      >
-        {text}
-      </button>
-    );
-  }
+export function TextButton({ text, handleClick, style }: TextButtonProps) {
+  return (
+    <button
+      className={clsx("rounded-3xl border px-8 py-2 text-base font-bold", {
+        "border-white text-white hover:bg-white hover:text-orange":
+          style === "primary",
+        "border-orange text-orange hover:bg-orange hover:text-white":
+          style === "secondary",
+      })}
+      onClick={handleClick}
+    >
+      {text}
+    </button>
+  );
 }
 
 export function IconButton({
@@ -96,9 +74,12 @@ export function IconButton({
     return (
       <button
         onClick={handleClick}
-        className="button button--circle flex h-[80px] w-[80px] items-center justify-center rounded-full border border-orange bg-white font-bold hover:bg-orange hover:text-white"
+        className="button button--circle flex h-[80px] w-[80px] items-center justify-center rounded-full border border-orange bg-white font-bold lg:hover:bg-orange lg:hover:text-white"
       >
-        <p className="button__text">{!hoverText ? "" : hoverText}</p>
+        <div className="hidden lg:block">
+          <p className="button__text">{!hoverText ? "" : hoverText}</p>
+        </div>
+
         <div className="button__img">{children}</div>
       </button>
     );

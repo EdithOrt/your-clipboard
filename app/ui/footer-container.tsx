@@ -79,18 +79,30 @@ export function FooterContainer() {
     <footer className="mt-4 grid w-full grid-cols-9">
       {clipboardList.length ? (
         <div className="col-start-1 col-end-5 flex gap-x-4 self-start">
-          <TextButton
-            text="Download all"
-            type="download"
-            handleClick={() => downloadTextFile(false)}
-            style="secondary"
-          />
+          <div className="hidden md:block">
+            <TextButton
+              text="Download all"
+              handleClick={() => downloadTextFile(false)}
+              style="secondary"
+            />
+          </div>
+
+          <div className="block md:hidden">
+            <IconButton
+              handleClick={() => downloadTextFile(false)}
+              type="circle"
+              variant="default"
+              hoverText="Download all"
+              style="primary"
+            >
+              <SVGComponent width="23" height="32" icon="download-icon" />
+            </IconButton>
+          </div>
 
           <div className="min-[320px]:hidden lg:block">
             {hasFavorites(clipboardList) && (
               <TextButton
                 text="Download favorites"
-                type="download"
                 handleClick={() => downloadTextFile(true)}
                 style="secondary"
               />
