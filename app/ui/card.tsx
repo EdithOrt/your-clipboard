@@ -95,12 +95,15 @@ export function Card({
           </div>
         </>
       ) : (
-        <>
+        <div className="flex h-full flex-col justify-evenly">
           <p className="text-center text-2xl">Are you sure to delete it?</p>
-          <TextButton text="Yes" handleClick={handleDelete} style="primary" />
 
-          <TextButton text="No" handleClick={handleClose} style="primary" />
-        </>
+          <div className="flex justify-around">
+            <TextButton text="Yes" handleClick={handleDelete} style="primary" />
+
+            <TextButton text="No" handleClick={handleClose} style="primary" />
+          </div>
+        </div>
       )}
     </section>
   );
