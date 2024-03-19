@@ -1,17 +1,19 @@
-.button--circle:hover .button__img {
-  display: none;
-}
+@media (min-width: 1024px) {
+  .button--circle:hover .button__img {
+    display: none;
+  }
 
-.button--circle:hover .button__text {
-  display: block;
-}
+  .button--circle:hover .button__text {
+    display: block;
+  }
 
-.button--circle .button__img {
-  display: block;
-}
+  .button--circle .button__img {
+    display: block;
+  }
 
-.button--circle .button__text {
-  display: none;
+  .button--circle .button__text {
+    display: none;
+  }
 }
 
 .button--icon:hover svg path {
