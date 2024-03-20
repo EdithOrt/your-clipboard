@@ -96,7 +96,9 @@ export function Card({
         </>
       ) : (
         <div className="flex h-full flex-col justify-evenly">
-          <p className="text-center text-2xl">Are you sure to delete it?</p>
+          <p className="text-center text-lg lg:text-2xl">
+            Are you sure to delete it?
+          </p>
 
           <div className="flex justify-around">
             <TextButton text="Yes" handleClick={handleDelete} style="primary" />
