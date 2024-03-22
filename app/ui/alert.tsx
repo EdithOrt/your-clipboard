@@ -1,15 +1,26 @@
 import clsx from "clsx";
 import { SVGComponent } from "../lib/utils";
 import { IconButton } from "./button";
+import { useEffect, useState } from "react";
 
 interface AlertProps {
   type: "error" | "warning" | "success";
   text: string;
-  handleAlert: React.MouseEventHandler<HTMLButtonElement>;
-  alertState: boolean;
 }
 
-export function Alert({ type, text, handleAlert, alertState }: AlertProps) {
+export function Alert({ type, text }: AlertProps) {
+  const [showAlert, setShowAlert] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAlert(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div
       className={clsx(
@@ -18,14 +29,14 @@ export function Alert({ type, text, handleAlert, alertState }: AlertProps) {
           "bg-red-400": type === "error",
           "bg-green-400": type === "success",
           "bg-yellow-400": type === "warning",
-          "alert--animation": alertState === false,
+          "alert--animation": !showAlert,
         },
       )}
     >
       <p>{text}</p>
 
       <IconButton
-        handleClick={handleAlert}
+        handleClick={() => setShowAlert(false)}
         type="default"
         variant="default"
         style="secondary"
