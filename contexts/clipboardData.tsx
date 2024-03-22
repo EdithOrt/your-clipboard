@@ -1,7 +1,14 @@
 "use client";
 
-import { createContext, useState, Dispatch, SetStateAction } from "react";
+import {
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 import moment from "moment";
+import { createID } from "@/app/lib/utils";
 
 interface ClipboardData {
   date: number;
@@ -111,46 +118,8 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     }, timer);
   };
 
-  const addClipboardItem = (item: ClipboardData) => {
-    if (!isInvalidClipboardItem(clipboardList, item.text)) {
-      const newClipboardList = [...clipboardList, item];
-      setClipboardList(newClipboardList);
-
-      updateSessionStorage(newClipboardList);
-    } else {
-      console.log("show alert");
-      setAlertList([
-        ...alertList,
-        {
-          message: "Text not saved because it already exists",
-          id: item.id,
-          type: "error",
-          active: true,
-        },
-      ]);
-
-      /* setTimeout(() => {
-        setAlertList([
-          ...alertList,
-          {
-            message: "Text not saved because it already exists",
-            id: item.id,
-            type: "error",
-            active: false,
-          },
-        ]);
-      }, 4000);
-
-      setTimeout(() => {
-        deleteAlertItem(item.id);
-      }, 5000); */
-    }
-
-    // setCurrentId(item.id);
-  };
-
   const getAlertAnimation = (id: string) => {
-    alertList.map((alertItem) => {
+    const newAlertList = alertList.map((alertItem) => {
       if (alertItem.id === id) {
         return {
           ...alertItem,
@@ -160,6 +129,29 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
         return alertItem;
       }
     });
+
+    return newAlertList;
+  };
+
+  const updateAlertList = (data: AlertState) => {
+    setAlertList([...alertList, data]);
+  };
+
+  const addClipboardItem = (item: ClipboardData) => {
+    if (!isInvalidClipboardItem(clipboardList, item.text)) {
+      const newClipboardList = [...clipboardList, item];
+      setClipboardList(newClipboardList);
+
+      updateSessionStorage(newClipboardList);
+    } else {
+      const id = createID();
+      updateAlertList({
+        message: "Text not saved because it already exists",
+        id: id,
+        type: "error",
+        active: true,
+      });
+    }
   };
 
   const getSessionStorageData = (name: string) => {
@@ -208,7 +200,6 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const getClipboardText = (dataList: Array<ClipboardData>): string => {
-    // Array<string>
     const stringsList = dataList.map((clipboardItem) => {
       return `------ ${moment.unix(clipboardItem.date).format("LLL")} ------\n\n${clipboardItem.text}\n\n\n\n`;
     });
@@ -218,9 +209,15 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     return "Tanks for using YOUR CLIPBOARD\n\n\n\n" + joinStrings;
   };
 
-  const updateAlertList = (data: AlertState) => {
-    setAlertList([...alertList, data]);
-  };
+  useEffect(() => {
+    if (alertList?.length > 11) {
+      const cleaAlertList = alertList.slice(5, alertList.length - 1);
+
+      setAlertList(cleaAlertList);
+    }
+
+    return () => {};
+  }, [alertList]);
 
   const data = {
     clipboardList,
