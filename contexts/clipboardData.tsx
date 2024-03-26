@@ -79,6 +79,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentId, setCurrentId] = useState<string>("");
   const [loader, setLoader] = useState<boolean>(true);
   const [modal, setModal] = useState<boolean>(false);
+  const [favoritesChange, setFavoritesChange] = useState(false);
 
   const isInvalidClipboardItem = (
     clipboardList: Array<ClipboardData>,
@@ -188,6 +189,8 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const updateClipboardItem = ({ id, action }: Action) => {
+    if (action === "favorite") setFavoritesChange(true);
+
     const updateClipboardList = clipboardList.map((clipboardItem) => {
       if (clipboardItem.id === id) {
         return { ...clipboardItem, [action]: !clipboardItem[action] };
@@ -218,6 +221,41 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
     return () => {};
   }, [alertList]);
+
+  const getListOrderByDate = (
+    clipboardData: ClipboardData[],
+  ): ClipboardData[] => {
+    return clipboardData.sort((a, b) => a.date - b.date);
+  };
+
+  const getOrderList = (clipboardData: ClipboardData[]): ClipboardData[] => {
+    const favoritesItems = clipboardData.filter((clipboardItem) => {
+      return clipboardItem.favorite;
+    });
+
+    getListOrderByDate(favoritesItems);
+
+    const noFavoritesIntems = clipboardData.filter((clipboardItem) => {
+      return !clipboardItem.favorite;
+    });
+
+    getListOrderByDate(noFavoritesIntems);
+
+    const orderList = [...favoritesItems, ...noFavoritesIntems];
+
+    return orderList;
+  };
+
+  useEffect(() => {
+    if (favoritesChange) {
+      const orderList = getOrderList(clipboardList);
+
+      setClipboardList(orderList);
+      setFavoritesChange(false);
+    }
+
+    return () => {};
+  }, [favoritesChange]);
 
   const data = {
     clipboardList,

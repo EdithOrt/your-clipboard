@@ -70,11 +70,6 @@ export function FooterContainer() {
     element.click();
   };
 
-  useEffect(() => {
-    console.log({ clipboardList });
-    return () => {};
-  }, [clipboardList]);
-
   return (
     <footer className="mt-4 grid w-full grid-cols-11">
       {clipboardList.length ? (
