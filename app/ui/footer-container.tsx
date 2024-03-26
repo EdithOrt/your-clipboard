@@ -76,9 +76,9 @@ export function FooterContainer() {
   }, [clipboardList]);
 
   return (
-    <footer className="mt-4 grid w-full grid-cols-9">
+    <footer className="mt-4 grid w-full grid-cols-11">
       {clipboardList.length ? (
-        <div className="col-start-1 col-end-5 flex gap-x-4 self-start">
+        <div className="col-start-1 col-end-6 flex gap-x-5 self-start">
           <div className="hidden md:block">
             <TextButton
               text="Download all"
@@ -99,7 +99,7 @@ export function FooterContainer() {
             </IconButton>
           </div>
 
-          <div className="min-[320px]:hidden lg:block">
+          <div className="hidden lg:block">
             {hasFavorites(clipboardList) && (
               <TextButton
                 text="Download favorites"
@@ -113,7 +113,7 @@ export function FooterContainer() {
         <span />
       )}
 
-      <div className="col-start-5 col-end-6 self-center justify-self-center">
+      <div className="col-start-6 col-end-7 self-center justify-self-center">
         <IconButton
           handleClick={addText}
           type="circle"
@@ -126,7 +126,7 @@ export function FooterContainer() {
       </div>
 
       {clipboardList.length ? (
-        <div className="col-start-6 col-end-10 mr-4 justify-self-end">
+        <div className="col-start-7 col-end-12 justify-self-end">
           <IconButton
             handleClick={() => handleModal()}
             type="circle"
