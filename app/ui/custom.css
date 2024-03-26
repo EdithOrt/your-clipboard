@@ -66,9 +66,11 @@
     transform: translateX(0);
     opacity: 1;
   }
+
   100% {
-    transform: translateX(1000px);
+    transform: translateX(500px);
     opacity: 0;
+    display: none;
   }
 }
 /* animation: alert 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both; */
