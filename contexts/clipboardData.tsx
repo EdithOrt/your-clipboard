@@ -189,8 +189,6 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const updateClipboardItem = ({ id, action }: Action) => {
-    if (action === "favorite") setFavoritesChange(true);
-
     const updateClipboardList = clipboardList.map((clipboardItem) => {
       if (clipboardItem.id === id) {
         return { ...clipboardItem, [action]: !clipboardItem[action] };
@@ -199,6 +197,9 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
     });
 
     setClipboardList(updateClipboardList);
+    if (action === "favorite") {
+      return setFavoritesChange(true);
+    }
     updateSessionStorage(updateClipboardList);
   };
 
@@ -251,6 +252,7 @@ const ClipboardDataProvider: React.FC<{ children: React.ReactNode }> = ({
       const orderList = getOrderList(clipboardList);
 
       setClipboardList(orderList);
+      updateSessionStorage(orderList);
       setFavoritesChange(false);
     }
 
