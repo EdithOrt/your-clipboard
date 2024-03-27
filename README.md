@@ -8,7 +8,7 @@
   
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/EdithOrt/your-clipboard?color=FF9341">
 
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/mfts/papermark">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/EdithOrt/your-clipboard">
 
   <img alt="Followers" src="https://img.shields.io/github/followers/EdithOrt">
 
