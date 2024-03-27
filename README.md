@@ -1,8 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Your clipboard
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+  <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/EdithOrt/your-clipboard/Production">
+
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/EdithOrt/your-clipboard">
+  
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/EdithOrt/your-clipboard?color=FF9341">
+
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/mfts/papermark">
+
+  <img alt="Followers" src="https://img.shields.io/github/followers/EdithOrt">
+
+</div>
+
+It is a website to temporarily save text that you have previously copied to your clipboard. This way you will not lose the information that you consider important.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Dependencies](#dependencies)
+- [Folder Structure](#folder-structure)
+- [Contributing](#contributing)
+- [Contributors](#contributors)
+
+## Installation
+
+```bash
+git clone https://github.com/EdithOrt/your-clipboard.git
+cd your-clipboard
+npm install
+```
+
+## Usage
 
 ```bash
 npm run dev
@@ -12,25 +43,83 @@ yarn dev
 pnpm dev
 # or
 bun dev
+
+Open http://localhost:3000 in your browser
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- React
+- React-dom
+- Next
+- Next-images
+- Moment
+- Clsx
+- Typescript
+- Tailwindcss
+- Autoprefixer
+- Prettier
+- Eslint
+- Postcss
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Folder Structure
 
-## Learn More
+your-clipboard/
+│
+├── public/
+│ └── y-clipboard-logo.svg
+│
+│
+├── app/
+│ ├── lib/
+│ │ ├── updateClipboard.tsx
+│ │ └── utils.tsx
+│ ├── ui/
+│ │ ├── alert.tsx
+│ │ ├── alerts-container.tsx
+│ │ ├── button.tsx
+│ │ ├── card.tsx
+│ │ ├── cards-container.tsx
+│ │ ├── custom.css
+│ │ ├── empty-state.tsx
+│ │ ├── fonts.ts
+│ │ ├── footer-container.tsx
+│ │ ├── modal-container.tsx
+│ │ ├── modal.tsx
+│ │ ├── navbar.tsx
+│ │ └── tooltip.xml
+│ ├── favicon.ico
+│ ├── globals.css
+│ ├── layout.tsx
+│ ├── opengraph-image.png
+│ ├── page.tsx
+│ ├── providers.tsx
+│ ├── robots.txt
+│ └── sitemap.xml
+│
+├── contexts/
+│ └── clipboardData.tsx
+│
+├── .eslintrc.json
+├── .gitignore
+├── aditional.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── prettier.config.js
+├── README.md
+├── tailwind.config.ts
+└── tsconfig.json
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Your clipboard is an open-source project and we welcome contributions from the community.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+If you'd like to contribute, please fork the repository and make changes as you'd like. And pull request your changes!
 
-## Deploy on Vercel
+## Contributors
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<a href="https://github.com/EdithOrt/your-clipboard/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=EdithOrt/your-clipboard" />
+</a>
