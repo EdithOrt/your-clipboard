@@ -64,6 +64,7 @@ Open http://localhost:3000 in your browser
 
 ## Folder Structure
 
+```bash
 your-clipboard/
 │
 ├── public/
@@ -111,6 +112,7 @@ your-clipboard/
 ├── README.md
 ├── tailwind.config.ts
 └── tsconfig.json
+```
 
 ## Contributing
 
